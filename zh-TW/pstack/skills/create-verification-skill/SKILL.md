@@ -35,7 +35,7 @@ disable-model-invocation: true
 
 ## 3. 建立功能地圖的種子
 
-建立 `.cursor/skills/verify-<app>/features/README.md`，加上你能找出的每個面向使用者的功能各一個檔案（一開始以前 3～5 個為目標，從路由、指令、選單或文件中找）。依照 [`references/feature-map-example/`](references/feature-map-example/) 的形狀，有一個 README 索引和每個功能一個檔案。每個檔案從使用者的角度回答：這個功能是什麼、怎麼到達它、如何用測試框架操作它，以及什麼可觀察的最終狀態能證明它正常。四個 H2 標題是 `Sub-features`、`How to get to it (user POV)`、`Driving it with <harness>` 和 `Gotchas`。如果種子資料缺少某條使用流程需要的前置條件，那條流程就回報失敗，原因寫在該功能的 `Gotchas` 中。永遠不要為了讓它通過而削弱流程。地圖是 repo 中被維護的驗證來源；當地圖列出了其他進入點時，只操作一個方便的進入點的證明是不完整的。
+建立 `.cursor/skills/verify-<app>/features/README.md`，加上你能找出的每個面向使用者的功能各一個檔案（一開始以前 3～5 個為目標，從路由、指令、選單或文件中找）。依照 [`references/feature-map-example/`](./references/feature-map-example/) 的形狀，有一個 README 索引和每個功能一個檔案。每個檔案從使用者的角度回答：這個功能是什麼、怎麼到達它、如何用測試框架操作它，以及什麼可觀察的最終狀態能證明它正常。四個 H2 標題是 `Sub-features`、`How to get to it (user POV)`、`Driving it with <harness>` 和 `Gotchas`。如果種子資料缺少某條使用流程需要的前置條件，那條流程就回報失敗，原因寫在該功能的 `Gotchas` 中。永遠不要為了讓它通過而削弱流程。地圖是 repo 中被維護的驗證來源；當地圖列出了其他進入點時，只操作一個方便的進入點的證明是不完整的。
 
 ## 4. 交出之前先證明產生的技能
 

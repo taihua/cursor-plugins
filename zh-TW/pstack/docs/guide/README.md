@@ -1,6 +1,6 @@
 # pstack 新手指南（繁體中文版）
 
-> 本指南翻譯自 [`pstack/docs/guide/`](../../../pstack/docs/guide/README.md)。範例提示詞已改寫成中文，你可以直接複製使用——agent 看得懂中文。斜線指令（如 `/poteto-mode`）請照打英文。看不懂的詞請查 [術語表](../../README.md#術語表)。
+> 本指南翻譯自 [`pstack/docs/guide/`](./README.md)。範例提示詞已改寫成中文，你可以直接複製使用——agent 看得懂中文。斜線指令（如 `/poteto-mode`）請照打英文。看不懂的詞請查 [術語表](../../README.md#術語表)。
 
 當你不再對 agent 事事插手時，pstack 的效果最好。你只要描述「想要什麼」以及「怎樣算完成」。`/poteto-mode` 會挑選劇本，在步驟需要時執行其他技能，並把證據拿給你看。這份指南用實際的提示詞教你養成這個習慣。
 
@@ -19,7 +19,7 @@
 
 第一次請照順序讀。之後每一頁都可以單獨查閱。
 
-卡住了，或不知道該用哪個技能時，輸入 [`/poteto-help`](../../../pstack/skills/poteto-help/SKILL.md) 加上你的問題：
+卡住了，或不知道該用哪個技能時，輸入 [`/poteto-help`](../../skills/poteto-help/SKILL.md) 加上你的問題：
 
 ```text
 /poteto-help 我該用哪個技能來審查這個分支？

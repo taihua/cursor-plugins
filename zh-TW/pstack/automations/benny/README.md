@@ -20,6 +20,6 @@ benny 提供兩個處理 Slack 問題回報的 Cursor 自動化。一個負責�
 }
 ```
 
-4. 把使用者擁有的設定放在被複製的套件之外，例如 `.cursor/benny/`。改編 [`configuration.example.yaml`](../../../../pstack/automations/benny/templates/configuration.example.yaml) 和 [`feature-map.example.md`](./skills/reproduce-and-fix-issues/references/feature-map.example.md)。
+4. 把使用者擁有的設定放在被複製的套件之外，例如 `.cursor/benny/`。改編 [`configuration.example.yaml`](./templates/configuration.example.yaml) 和 [`feature-map.example.md`](./skills/reproduce-and-fix-issues/references/feature-map.example.md)。
 5. 在啟用任一個自動化之前，提交 `.cursor/settings.json`、`.cursor/automations/benny/`，以及任何不含機密的設定。
 6. 審查每份新的自動化草稿，或在編輯器中更新既有的自動化。然後送出一份無害的測試回報，並確認每則來源頻道中的貼文都留在原本的討論串中。

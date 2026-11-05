@@ -2,7 +2,7 @@
 
 `/poteto-mode` 是正門。你給它一個目標，它從二十三個劇本中挑一個，把該劇本的步驟複製到待辦清單，並在步驟需要時呼叫其他技能。這一頁教你好的提示詞長什麼樣子，以及你其實只需要寫多少。
 
-![一位調度員拉動轉轍桿，把乘著軌道手搖車的機器人導向亮燈的閘門；上方的 /poteto-mode 出發看板列著 BUG FIX、FEATURE、INVESTIGATION。](../../../pstack/docs/guide/images/router.jpg)
+![一位調度員拉動轉轍桿，把乘著軌道手搖車的機器人導向亮燈的閘門；上方的 /poteto-mode 出發看板列著 BUG FIX、FEATURE、INVESTIGATION。](../../../../pstack/docs/guide/images/router.jpg)
 
 ## 你的提示詞會經歷什麼
 
@@ -25,7 +25,7 @@ flowchart TD
     J --> K
 ```
 
-上圖是常見路線。另外還有這些劇本：爬坡優化某個指標、診斷執行期症狀與擷取的追蹤檔、原型、視覺一致、撰寫與評測技能、自主執行、開 PR、看顧 PR 或 PR 串到可合併、出貨已驗證的 PR 串、以自動駕駛處理 PR 佇列或 PR 串、統籌專案規模的計畫、接手工作、安全暫停、多階段計畫、清理 worktree。[劇本資料夾](../../../pstack/skills/poteto-mode/playbooks/) 裡有完整清單。
+上圖是常見路線。另外還有這些劇本：爬坡優化某個指標、診斷執行期症狀與擷取的追蹤檔、原型、視覺一致、撰寫與評測技能、自主執行、開 PR、看顧 PR 或 PR 串到可合併、出貨已驗證的 PR 串、以自動駕駛處理 PR 佇列或 PR 串、統籌專案規模的計畫、接手工作、安全暫停、多階段計畫、清理 worktree。[劇本資料夾](../../skills/poteto-mode/playbooks/) 裡有完整清單。
 
 ## 說目標，不要說儀式
 
@@ -64,9 +64,9 @@ flowchart TD
 /poteto-mode 讀這串討論。用你自己的話、用白話複述根本問題。先不要改任何程式碼。
 ```
 
-誤解會在複述時就浮現，在任何程式碼出現之前。在那時糾正，只花你一則訊息，而不是一次錯誤的修正。如果只想要複述、不走劇本，就用 [`/in-your-own-words`](../../../pstack/skills/in-your-own-words/SKILL.md)，它會複述 agent 認為你的目標是什麼、你想解決什麼問題。
+誤解會在複述時就浮現，在任何程式碼出現之前。在那時糾正，只花你一則訊息，而不是一次錯誤的修正。如果只想要複述、不走劇本，就用 [`/in-your-own-words`](../../skills/in-your-own-words/SKILL.md)，它會複述 agent 認為你的目標是什麼、你想解決什麼問題。
 
-不確定提示詞方向對不對時，送出前先用 [`/sharpen`](../../../pstack/skills/sharpen/SKILL.md)：
+不確定提示詞方向對不對時，送出前先用 [`/sharpen`](../../skills/sharpen/SKILL.md)：
 
 ```text
 /sharpen 寫一份 v2 設定格式的遷移指南。
@@ -112,7 +112,7 @@ agent 會告訴你：頂尖專家會做哪些你沒要求的事、他們會從�
 /poteto-mode 新任務。從 <base> 開一個新的 worktree 分支，然後把解析器的修改移植過去。
 ```
 
-每個任務都有自己的分支和 worktree，就沒有 agent 會踩到別人的檔案。worktree 會佔磁碟和電腦資源，所以一台筆電同時只能跑幾個。[開 PR 劇本](../../../pstack/skills/poteto-mode/playbooks/opening-a-pr.md) 本來就會在 worktree 裡處理程式碼修改，所以通常只有在特定的基底分支或位置很重要時，你才需要特別說。
+每個任務都有自己的分支和 worktree，就沒有 agent 會踩到別人的檔案。worktree 會佔磁碟和電腦資源，所以一台筆電同時只能跑幾個。[開 PR 劇本](../../skills/poteto-mode/playbooks/opening-a-pr.md) 本來就會在 worktree 裡處理程式碼修改，所以通常只有在特定的基底分支或位置很重要時，你才需要特別說。
 
 worktree 會越積越多。磁碟快滿時，問：
 
@@ -120,7 +120,7 @@ worktree 會越積越多。磁碟快滿時，問：
 /poteto-mode 是什麼吃掉了我的磁碟？把可以安全刪除的 worktree 清掉。
 ```
 
-[清理 worktree 劇本](../../../pstack/skills/poteto-mode/playbooks/worktree-cleanup.md) 會依合併狀態、未提交的修改、以及哪些聊天還在使用，把每個 worktree 分類。它只刪除證據顯示可以刪的，遇到有未提交修改的會停下來讓你決定。
+[清理 worktree 劇本](../../skills/poteto-mode/playbooks/worktree-cleanup.md) 會依合併狀態、未提交的修改、以及哪些聊天還在使用，把每個 worktree 分類。它只刪除證據顯示可以刪的，遇到有未提交修改的會停下來讓你決定。
 
 ## 讓它自己跑
 
@@ -130,10 +130,10 @@ worktree 會越積越多。磁碟快滿時，問：
 /poteto-mode 我要離開一下。一直做到遷移檢查回報舊呼叫端為零為止。把你的決策記錄下來。
 ```
 
-這種你之後才會審查的工作，會經過 [`/figure-it-out`](../../../pstack/skills/figure-it-out/SKILL.md)，它會設計執行的各個階段，並維護一份 [`/show-me-your-work`](../../../pstack/skills/show-me-your-work/SKILL.md) 決策紀錄。[讓工作在你睡覺時進行](./07-overnight.md) 會完整說明整夜合約。
+這種你之後才會審查的工作，會經過 [`/figure-it-out`](../../skills/figure-it-out/SKILL.md)，它會設計執行的各個階段，並維護一份 [`/show-me-your-work`](../../skills/show-me-your-work/SKILL.md) 決策紀錄。[讓工作在你睡覺時進行](./07-overnight.md) 會完整說明整夜合約。
 
 **陷阱：** 不要在提示詞裡列出技能（「先用 /how，再用 /architect，再用 /arena……」）。劇本已經安排好順序，你手寫的順序通常會打亂或漏掉劇本本來會保留的步驟。只有當你想覆寫某個特定選擇時，才點名技能。
 
-完整的路由規則請讀 [`poteto-mode`](../../../pstack/skills/poteto-mode/SKILL.md) 本身。
+完整的路由規則請讀 [`poteto-mode`](../../skills/poteto-mode/SKILL.md) 本身。
 
 下一頁：[理解程式碼](./03-understand.md)。

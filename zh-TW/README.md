@@ -6,7 +6,7 @@
 
 1. 先讀本頁，了解「plugin 是什麼」和下面的術語表。
 2. 讀 [pstack 介紹（中文）](./pstack/README.md)。
-3. 照著 [pstack 新手指南（中文，共 10 頁）](./pstack/guide/README.md) 一頁一頁做。
+3. 照著 [pstack 新手指南（中文，共 10 頁）](./pstack/docs/guide/README.md) 一頁一頁做。
 
 > 小提醒：跟 AI agent 下指令時**可以直接用中文**。例如：
 >
@@ -15,6 +15,28 @@
 > ```
 >
 > 斜線開頭的指令名稱（`/poteto-mode`）要照打英文，後面的描述用中文就可以。
+
+## pstack 完整中文版
+
+`zh-TW/pstack/` 是 `pstack/` 的完整繁體中文翻譯，資料夾結構和原版一模一樣，所以原版的 `pstack/X` 就對應到這裡的 `zh-TW/pstack/X`：
+
+| 位置 | 內容 |
+|:--|:--|
+| [`pstack/README.md`](./pstack/README.md) | pstack 介紹 |
+| [`pstack/docs/guide/`](./pstack/docs/guide/README.md) | 新手指南 10 頁 |
+| [`pstack/skills/poteto-mode/`](./pstack/skills/poteto-mode/SKILL.md) | 主技能，加上 23 個[劇本](./pstack/skills/poteto-mode/playbooks/) |
+| [`pstack/skills/`](./pstack/skills/) | 全部 58 個技能（34 個指令技能 + 24 條原則），含各自的參考檔 |
+| [`pstack/agents/`](./pstack/agents/) | `poteto-agent` 和 Comment Sicko 兩個子代理 |
+| [`pstack/automations/benny/`](./pstack/automations/benny/README.md) | benny 自動化套件（Slack 問題回報的分類與修正） |
+| [`pstack/docs/harness/claude-code.md`](./pstack/docs/harness/claude-code.md) | 在 Claude Code 中使用 pstack 的對照表 |
+
+翻譯原則：
+
+- **只是給人讀的。** AI 執行時讀的仍然是英文原檔，所以這些中文檔案不會改變 pstack 的行為。原版更新時，中文版不會自動同步。
+- **專有名詞、指令、檔名、程式碼保留英文。** 例如 `poteto-mode`、`worktree`、`/loop`。第一次出現的術語會在括號中附上中文。
+- **程式碼沒有翻譯。** 腳本（`.ts`、`.mjs`、`.sh`）、測試資料和圖片只保留在原版中，中文檔案裡的連結會直接指回原檔。
+- **給 agent 的提示詞模板**（例如 `reflect`、`why`、`how` 的 `references/`）也翻成中文方便理解，但實際使用時以英文原版為準。這類檔案的開頭都有標註。
+- 每個 `SKILL.md` 開頭都有一行連結，可以回到對應的英文原檔對照閱讀。
 
 ## Plugin 是什麼？
 

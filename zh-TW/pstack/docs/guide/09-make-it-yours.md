@@ -10,7 +10,7 @@ poteto-mode 是一個人的風格。它底下的劇本、路由和模型角色�
 /automate-me
 ```
 
-你不用描述自己的風格，因為 [`/automate-me`](../../../pstack/skills/automate-me/SKILL.md) 會從你的歷史紀錄中讀出來。它會挖掘目前工作區最近的對話紀錄，找出重複出現的偏好——你喜歡怎樣的回覆、怎樣委派、怎樣驗證、怎樣的程式碼、文字和流程——然後問你哪些模式真的是你。它透過 Cursor 內建的 `create-skill` 流程起草 `.cursor/skills/<你的名字>-mode/SKILL.md`，用 [`/unslop`](../../../pstack/skills/unslop/SKILL.md) 整理草稿，並從 worktree 開一個 PR，讓你像審查其他改動一樣審查它。
+你不用描述自己的風格，因為 [`/automate-me`](../../skills/automate-me/SKILL.md) 會從你的歷史紀錄中讀出來。它會挖掘目前工作區最近的對話紀錄，找出重複出現的偏好——你喜歡怎樣的回覆、怎樣委派、怎樣驗證、怎樣的程式碼、文字和流程——然後問你哪些模式真的是你。它透過 Cursor 內建的 `create-skill` 流程起草 `.cursor/skills/<你的名字>-mode/SKILL.md`，用 [`/unslop`](../../skills/unslop/SKILL.md) 整理草稿，並從 worktree 開一個 PR，讓你像審查其他改動一樣審查它。
 
 習慣改變時，再跑一次：
 
@@ -28,7 +28,7 @@ poteto-mode 是一個人的風格。它底下的劇本、路由和模型角色�
 /reflect 這花了太久時間。把學到的東西記下來，下次別再重蹈覆轍。
 ```
 
-[`/reflect`](../../../pstack/skills/reflect/SKILL.md) 會把對話紀錄交給三個平行的審查者，接著一個綜合者把提案分成 `Accepted`（接受）、`Rejected`（拒絕）、`Backlog`（待辦），並在修改任何技能前等你核准。**只有當一個提案會改變未來的決定時，才核准它。** 一次奇怪的工作經驗是軼事，不是規則。
+[`/reflect`](../../skills/reflect/SKILL.md) 會把對話紀錄交給三個平行的審查者，接著一個綜合者把提案分成 `Accepted`（接受）、`Rejected`（拒絕）、`Backlog`（待辦），並在修改任何技能前等你核准。**只有當一個提案會改變未來的決定時，才核准它。** 一次奇怪的工作經驗是軼事，不是規則。
 
 ## 用 `/correct` 修正環境
 
@@ -39,7 +39,7 @@ poteto-mode 是一個人的風格。它底下的劇本、路由和模型角色�
 3. 用測試**抓到**它。
 4. 寫成文件或 agent 規則。agent 跳過規則時什麼都不會失敗，所以這排最後。
 
-人工審查不在清單上。一個必須在每個 PR 上抓同一個錯誤的審查者，正是這個方法要解決的問題。[`/correct`](../../../pstack/skills/correct/SKILL.md) 會做這件事：
+人工審查不在清單上。一個必須在每個 PR 上抓同一個錯誤的審查者，正是這個方法要解決的問題。[`/correct`](../../skills/correct/SKILL.md) 會做這件事：
 
 ```text
 /correct agent 一直直接呼叫資料庫客戶端，而不是透過 repository 層
@@ -57,9 +57,9 @@ poteto-mode 是一個人的風格。它底下的劇本、路由和模型角色�
 /poteto-mode 寫一個技能，用來驗證這個 repo 的資料庫遷移
 ```
 
-寫技能會對應到[撰寫或修改技能劇本](../../../pstack/skills/poteto-mode/playbooks/authoring-a-skill.md)，它會走 Cursor 內建的 `create-skill`、驗證 frontmatter 和連結，並透過「開 PR」劇本交付結果。給 agent 看的文字比給人看的標準更高，因為一句沒幫助的話會變成未來某個 agent 照做的指令。讓劇本把關這個標準，不要徒手寫 `SKILL.md`。
+寫技能會對應到[撰寫或修改技能劇本](../../skills/poteto-mode/playbooks/authoring-a-skill.md)，它會走 Cursor 內建的 `create-skill`、驗證 frontmatter 和連結，並透過「開 PR」劇本交付結果。給 agent 看的文字比給人看的標準更高，因為一句沒幫助的話會變成未來某個 agent 照做的指令。讓劇本把關這個標準，不要徒手寫 `SKILL.md`。
 
-有兩種特殊情況有自己的產生器。必須操作你的 app 並證明行為的技能是「驗證技能」，請改用 [`/create-verification-skill`](../../../pstack/skills/create-verification-skill/SKILL.md) 和 [`/maintain-verification-skill`](../../../pstack/skills/maintain-verification-skill/SKILL.md)。用模型檢查器、數學證明或其他驗證器檢查程式碼性質的技能是「形式驗證技能」，請用 [`/create-formal-verification-skill`](../../../pstack/skills/create-formal-verification-skill/SKILL.md) 和 [`/maintain-formal-verification-skill`](../../../pstack/skills/maintain-formal-verification-skill/SKILL.md)。[驗證並出貨](./06-verify-and-ship.md#用形式驗證技能證明一個性質) 涵蓋這兩種。
+有兩種特殊情況有自己的產生器。必須操作你的 app 並證明行為的技能是「驗證技能」，請改用 [`/create-verification-skill`](../../skills/create-verification-skill/SKILL.md) 和 [`/maintain-verification-skill`](../../skills/maintain-verification-skill/SKILL.md)。用模型檢查器、數學證明或其他驗證器檢查程式碼性質的技能是「形式驗證技能」，請用 [`/create-formal-verification-skill`](../../skills/create-formal-verification-skill/SKILL.md) 和 [`/maintain-formal-verification-skill`](../../skills/maintain-formal-verification-skill/SKILL.md)。[驗證並出貨](./06-verify-and-ship.md#用形式驗證技能證明一個性質) 涵蓋這兩種。
 
 ## 用 `/technical-writing` 依標準寫文件
 
@@ -69,7 +69,7 @@ poteto-mode 是一個人的風格。它底下的劇本、路由和模型角色�
 /technical-writing 審查 README 的修改
 ```
 
-[`/technical-writing`](../../../pstack/skills/technical-writing/SKILL.md) 套用一套分層的標準。它的目標是讓一個疲憊的工程師**第一次讀就懂**。它會先決定文件的類型（教學、操作指南、參考手冊或概念解說），再逐句處理：誰做了什麼、一句一個想法、沒有任何能有兩種解讀的句子。用它來審查你或 agent 剛寫好的東西，或在要求寫文件時一開始就點名它。
+[`/technical-writing`](../../skills/technical-writing/SKILL.md) 套用一套分層的標準。它的目標是讓一個疲憊的工程師**第一次讀就懂**。它會先決定文件的類型（教學、操作指南、參考手冊或概念解說），再逐句處理：誰做了什麼、一句一個想法、沒有任何能有兩種解讀的句子。用它來審查你或 agent 剛寫好的東西，或在要求寫文件時一開始就點名它。
 
 > 註：這個技能的標準是針對英文寫作設計的（例如簡化技術英文 STE、Global English）。
 
@@ -89,13 +89,13 @@ poteto-mode 是一個人的風格。它底下的劇本、路由和模型角色�
 
 一開始就要求做評測，能讓修改保持誠實。從一次糟糕經驗寫出來的修正，往往會對那次經驗過度擬合；修改多次之後，技能就會漂移。評測能在漂移出貨之前抓到它。
 
-[評測劇本](../../../pstack/skills/poteto-mode/playbooks/eval.md) 是圍繞一種失敗模式設計的：**觀察者效應**。知道自己在被評測的 agent 會表現得不一樣。所以候選 agent 拿到的是看起來很自然的任務、在清理過的資料夾裡，永遠不會看到「eval」或「candidate」這些字，也永遠不知道彼此存在。一個評審在中性標籤下替所有輸出打分數；「是否有照著指示鏈走」則是依據每個候選者**實際讀了哪些檔案**來評分，而不是依它自己說了什麼。
+[評測劇本](../../skills/poteto-mode/playbooks/eval.md) 是圍繞一種失敗模式設計的：**觀察者效應**。知道自己在被評測的 agent 會表現得不一樣。所以候選 agent 拿到的是看起來很自然的任務、在清理過的資料夾裡，永遠不會看到「eval」或「candidate」這些字，也永遠不知道彼此存在。一個評審在中性標籤下替所有輸出打分數；「是否有照著指示鏈走」則是依據每個候選者**實際讀了哪些檔案**來評分，而不是依它自己說了什麼。
 
 接受判定之前，自己讀過每一份輸出。如果你不同意評審，先懷疑評分標準，再懷疑你自己的判斷。
 
 ## 用 `/make-bot-ui` 做機器人介面
 
-有一個看情況使用的技能是給 Grok Bot 使用者的。[`/make-bot-ui`](../../../pstack/skills/make-bot-ui/SKILL.md) 會做一個小頁面，上面的按鈕可以透過 webhook 例行程序喚醒機器人。例如，你可以在一個審查佇列中左右滑動，每一次滑動就請機器人處理那一項。你電腦上的一個伺服器會保管 webhook 的傳送者金鑰，所以金鑰永遠不會跑到瀏覽器或聊天裡。這個技能也涵蓋如何在 Tailscale 上公開這個頁面。
+有一個看情況使用的技能是給 Grok Bot 使用者的。[`/make-bot-ui`](../../skills/make-bot-ui/SKILL.md) 會做一個小頁面，上面的按鈕可以透過 webhook 例行程序喚醒機器人。例如，你可以在一個審查佇列中左右滑動，每一次滑動就請機器人處理那一項。你電腦上的一個伺服器會保管 webhook 的傳送者金鑰，所以金鑰永遠不會跑到瀏覽器或聊天裡。這個技能也涵蓋如何在 Tailscale 上公開這個頁面。
 
 **陷阱：** 不要因為技能表現不好就在任務進行到一半時修改它。用它自己的 PR 去修，讓任務繼續進行。跟功能開發糾纏在一起出貨的技能修改，審查時看不見，也無法評測。
 

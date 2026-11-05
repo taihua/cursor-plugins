@@ -1,10 +1,10 @@
 # 驗證結果並開 PR
 
-「它能編譯」不是證據。[證明它能用原則](../../../pstack/skills/principle-prove-it-works/SKILL.md) 要求 agent 在回報成功前先檢查真實的成品，而你的工作是讓「真實的成品」可以被檢查。這一頁涵蓋：設定完成條件、檢驗量測數字、為你的 app 產生驗證技能、形式驗證測試很少碰到的性質、開 PR，以及把它推到合併。
+「它能編譯」不是證據。[證明它能用原則](../../skills/principle-prove-it-works/SKILL.md) 要求 agent 在回報成功前先檢查真實的成品，而你的工作是讓「真實的成品」可以被檢查。這一頁涵蓋：設定完成條件、檢驗量測數字、為你的 app 產生驗證技能、形式驗證測試很少碰到的性質、開 PR，以及把它推到合併。
 
 在大部分 agent 工作中，驗證是最慢的一步，因為這一步通常在等人。讓 agent 有能力自己驗證，你就不再是瓶頸。跳過它的話，跑再多 agent 也只會給你更多沒檢查過、等你審查的工作。
 
-![一架原型飛機在真實的測試航線上飛行，她拿著碼表計時，機器人們錄影並勾選檢查清單；終端機顯示 verify: pass, evidence: captured。](../../../pstack/docs/guide/images/verification.jpg)
+![一架原型飛機在真實的測試航線上飛行，她拿著碼表計時，機器人們錄影並勾選檢查清單；終端機顯示 verify: pass, evidence: captured。](../../../../pstack/docs/guide/images/verification.jpg)
 
 ## 一開始就說明完成條件
 
@@ -19,14 +19,14 @@
 依改動類型選擇檢查方式：
 
 - CLI 的改動：執行真正的指令。
-- UI 的改動：在執行中的 app 裡走一遍改到的流程。如果必須跟參考畫面像素級一致，[視覺一致劇本](../../../pstack/skills/poteto-mode/playbooks/visual-parity.md) 會拿截圖跟凍結的基準比對，而不是用眼睛判斷。
+- UI 的改動：在執行中的 app 裡走一遍改到的流程。如果必須跟參考畫面像素級一致，[視覺一致劇本](../../skills/poteto-mode/playbooks/visual-parity.md) 會拿截圖跟凍結的基準比對，而不是用眼睛判斷。
 - 解析器或遷移：重播一份存下來的輸入。
 - 效能改動：比較前後的效能分析。
 - 儲存相關的改動：把寫入的值讀回來。
 
 要求證據以你能自己檢查的成品形式交付：先失敗再通過的測試、前後對照影片、追蹤檔、截圖。如果修正已經合併，要求在 main 上再跑一次同樣的檢查。成品勝過看似合理的解釋，因為你可以質疑它，而不必重播整個過程。
 
-對於你不太放心的小 diff，[`/blast-radius`](../../../pstack/skills/blast-radius/SKILL.md) 會找出它在其他地方可能弄壞什麼。它會找到「讓這個改動安全」的那個關鍵事實，並**用執行程式碼來證明**，而不是用論證。
+對於你不太放心的小 diff，[`/blast-radius`](../../skills/blast-radius/SKILL.md) 會找出它在其他地方可能弄壞什麼。它會找到「讓這個改動安全」的那個關鍵事實，並**用執行程式碼來證明**，而不是用論證。
 
 ## 用 `/benchmark-checklist` 檢驗量測數字
 
@@ -36,7 +36,7 @@
 /benchmark-checklist 在放進 PR 之前，檢驗匯出加速的數字
 ```
 
-[`/benchmark-checklist`](../../../pstack/skills/benchmark-checklist/SKILL.md) 會問七個問題，每個都要求來自實際執行的證據：
+[`/benchmark-checklist`](../../skills/benchmark-checklist/SKILL.md) 會問七個問題，每個都要求來自實際執行的證據：
 
 1. 是什麼限制了這個數字？為什麼不是兩倍？
 2. 每一邊都用跟正式環境一樣的調校方式執行嗎？
@@ -46,7 +46,7 @@
 6. 從端到端來看，在使用者真正等待的路徑上，它重要嗎？
 7. 工作真的有在計時區間內發生嗎？
 
-判定結果會是：變快、變慢、無可量測的差異、或無法判定，並附上執行次數、範圍和瓶頸。如果它說不出瓶頸，或有某一邊沒有調校，它就會判定為無法判定。`/poteto-mode` 已經在效能問題和爬坡優化劇本中執行這份檢查表，所以你只需要在「在那些劇本之外量到東西」或「別人的數字好得不像真的」時自己輸入。它是 [解釋這個數字原則](../../../pstack/skills/principle-explain-the-number/SKILL.md) 的實作版本。
+判定結果會是：變快、變慢、無可量測的差異、或無法判定，並附上執行次數、範圍和瓶頸。如果它說不出瓶頸，或有某一邊沒有調校，它就會判定為無法判定。`/poteto-mode` 已經在效能問題和爬坡優化劇本中執行這份檢查表，所以你只需要在「在那些劇本之外量到東西」或「別人的數字好得不像真的」時自己輸入。它是 [解釋這個數字原則](../../skills/principle-explain-the-number/SKILL.md) 的實作版本。
 
 ## 建立專案驗證技能
 
@@ -56,9 +56,9 @@
 /create-verification-skill
 ```
 
-[`/create-verification-skill`](../../../pstack/skills/create-verification-skill/SKILL.md) 訪談的是 **repo**，不是你。它會搞清楚：使用者會碰到什麼、app 在本機怎麼啟動、可以用什麼來操作它（優先用既有的測試框架，否則用瀏覽器與 CDP、PTY 或單純的 HTTP）、什麼證據能證明行為、以及能否同時跑兩個實例。只有程式碼回答不了的問題才會問你。
+[`/create-verification-skill`](../../skills/create-verification-skill/SKILL.md) 訪談的是 **repo**，不是你。它會搞清楚：使用者會碰到什麼、app 在本機怎麼啟動、可以用什麼來操作它（優先用既有的測試框架，否則用瀏覽器與 CDP、PTY 或單純的 HTTP）、什麼證據能證明行為、以及能否同時跑兩個實例。只有程式碼回答不了的問題才會問你。
 
-它會寫出 `.cursor/skills/verify-<app>/`：給 agent 看的操作說明，包含明確的 Launch（啟動）、Doctor（健康檢查）、Drive（操作）、Evidence（證據）、Cleanup（清理）章節，若附有腳本還有 Helpers 章節；另外在 `features/` 底下有一份功能地圖，索引 app 有哪些功能、以及什麼結果能證明每個功能正常。這個技能附了一份[功能地圖範例](../../../pstack/skills/create-verification-skill/references/feature-map-example/)，有一個 README 索引，以及每個功能一個檔案（使用四個必要的二級標題）。交給你之前，產生器會端到端證明這個技能一次：啟動、健康檢查、操作一個功能、擷取證據、清理，然後確認證據在清理後仍然存在。**如果這個證明失敗，就不要使用它的輸出。**
+它會寫出 `.cursor/skills/verify-<app>/`：給 agent 看的操作說明，包含明確的 Launch（啟動）、Doctor（健康檢查）、Drive（操作）、Evidence（證據）、Cleanup（清理）章節，若附有腳本還有 Helpers 章節；另外在 `features/` 底下有一份功能地圖，索引 app 有哪些功能、以及什麼結果能證明每個功能正常。這個技能附了一份[功能地圖範例](../../skills/create-verification-skill/references/feature-map-example/)，有一個 README 索引，以及每個功能一個檔案（使用四個必要的二級標題）。交給你之前，產生器會端到端證明這個技能一次：啟動、健康檢查、操作一個功能、擷取證據、清理，然後確認證據在清理後仍然存在。**如果這個證明失敗，就不要使用它的輸出。**
 
 從此以後，「在 app 裡驗證」就變成任何 agent 在這個 repo 裡都能執行的步驟，不需要任何設定對話。當你想要特定形式的證據時，在提示詞裡點名它：
 
@@ -70,9 +70,9 @@
 /poteto-mode 用 /verify-<app> 重現這個問題。如果在 main 上能重現，就修好它並給我影片作為證據。
 ```
 
-驗證技能能用之後，[`/swarm`](../../../pstack/skills/swarm/SKILL.md) 可以按功能地圖的項目拆分一次完整檢查並彙整結果。一群驗證者也能在足夠大的樣本上確認效能改善，或在 PR 出貨前對 app 做模糊測試找退步。
+驗證技能能用之後，[`/swarm`](../../skills/swarm/SKILL.md) 可以按功能地圖的項目拆分一次完整檢查並彙整結果。一群驗證者也能在足夠大的樣本上確認效能改善，或在 PR 出貨前對 app 做模糊測試找退步。
 
-把驗證技能當成**基礎設施**，而不是一次性的東西。把它提交進 repo，讓團隊裡每個人、每個 agent 都用同樣方式操作 app。然後[打造槓桿](../../../pstack/skills/principle-build-the-lever/SKILL.md)：當 agent 一直在寫用完即丟的腳本來點擊 app 時，要求做一個小型控制 CLI 讓技能去呼叫。agent 會花更少 token，每次執行也都能重現。agent 用得好的 CLI 有這些特點：
+把驗證技能當成**基礎設施**，而不是一次性的東西。把它提交進 repo，讓團隊裡每個人、每個 agent 都用同樣方式操作 app。然後[打造槓桿](../../skills/principle-build-the-lever/SKILL.md)：當 agent 一直在寫用完即丟的腳本來點擊 app 時，要求做一個小型控制 CLI 讓技能去呼叫。agent 會花更少 token，每次執行也都能重現。agent 用得好的 CLI 有這些特點：
 
 - 少數幾個可組合的指令，每個都做實際的工作，而不是很多很薄的指令。
 - 任何具破壞性的操作都有 `--dry-run`（試跑）選項。
@@ -91,7 +91,7 @@ app 會變，功能地圖會過時。**至少每天跑一次**，最好用排程
 /maintain-verification-skill
 ```
 
-[`/maintain-verification-skill`](../../../pstack/skills/maintain-verification-skill/SKILL.md) 會稽核產生出來的技能：每個功能平行派一個唯讀的原始碼讀者，再做一次實際操作每個對應功能的檢查。它一定以三種結果之一結束：`clean`（完整涵蓋、沒有東西要出貨）、`changed`（一個經證實的修正 PR，只限於驗證技能自己的資料夾）、`blocked`（指出卡住的原因）。它**從不**修改產品程式碼。如果實際操作時抓到產品退步，它會回報退步，而不是用修改文件來掩蓋。
+[`/maintain-verification-skill`](../../skills/maintain-verification-skill/SKILL.md) 會稽核產生出來的技能：每個功能平行派一個唯讀的原始碼讀者，再做一次實際操作每個對應功能的檢查。它一定以三種結果之一結束：`clean`（完整涵蓋、沒有東西要出貨）、`changed`（一個經證實的修正 PR，只限於驗證技能自己的資料夾）、`blocked`（指出卡住的原因）。它**從不**修改產品程式碼。如果實際操作時抓到產品退步，它會回報退步，而不是用修改文件來掩蓋。
 
 ## 用形式驗證技能證明一個性質
 
@@ -101,7 +101,7 @@ app 會變，功能地圖會過時。**至少每天跑一次**，最好用排程
 /create-formal-verification-skill
 ```
 
-[`/create-formal-verification-skill`](../../../pstack/skills/create-formal-verification-skill/SKILL.md) 會從程式碼中挑目標：一個程式碼做出的承諾，一旦違反會傷害使用者、而且測試很少碰到違反它的情況。它挑的是**最有價值**的目標，不是最容易驗證的。你也可以指定一個區域或一個 bug 讓它從那裡開始：
+[`/create-formal-verification-skill`](../../skills/create-formal-verification-skill/SKILL.md) 會從程式碼中挑目標：一個程式碼做出的承諾，一旦違反會傷害使用者、而且測試很少碰到違反它的情況。它挑的是**最有價值**的目標，不是最容易驗證的。你也可以指定一個區域或一個 bug 讓它從那裡開始：
 
 ```text
 /create-formal-verification-skill 工作租約和重試邏輯。同一個工作絕對不能同時執行兩次。
@@ -113,7 +113,7 @@ app 會變，功能地圖會過時。**至少每天跑一次**，最好用排程
 
 它會寫出一個專案專用技能，告訴下一個 agent：某個改動是否碰到被驗證的程式碼、如何用一個指令執行檢查、如何分辨真正的 bug 和建模錯誤。交給你之前，產生器會在一個「故意違反性質」的暫存改動上照著那個技能做一次，檢查必須抓到它。交接時會說明：驗證了什麼、用什麼工具和範圍、檢查發現了什麼、以及**沒有**涵蓋什麼。通過只代表模型或範圍內成立，不代表整個系統。
 
-這個技能也會記錄每個檢查涵蓋哪些程式碼，以及檢查最後一次與程式碼相符時的 commit。略過這個技能的合併和重構，可能讓檢查一直通過，但檢查的卻是已經不存在的程式碼描述。遇到這種情況後，執行 [`/maintain-formal-verification-skill`](../../../pstack/skills/maintain-formal-verification-skill/SKILL.md)。它會依程式碼更新驗證、重新執行、證明每個更新後的檢查仍然**能夠**失敗，並告訴你每個失敗是「驗證本身過時」還是「程式碼真的有 bug」。
+這個技能也會記錄每個檢查涵蓋哪些程式碼，以及檢查最後一次與程式碼相符時的 commit。略過這個技能的合併和重構，可能讓檢查一直通過，但檢查的卻是已經不存在的程式碼描述。遇到這種情況後，執行 [`/maintain-formal-verification-skill`](../../skills/maintain-formal-verification-skill/SKILL.md)。它會依程式碼更新驗證、重新執行、證明每個更新後的檢查仍然**能夠**失敗，並告訴你每個失敗是「驗證本身過時」還是「程式碼真的有 bug」。
 
 ## 用狀態圖呈現行為
 
@@ -123,7 +123,7 @@ app 會變，功能地圖會過時。**至少每天跑一次**，最好用排程
 /statechart 使用者在離線狀態下編輯筆記時會看到什麼
 ```
 
-[`/statechart`](../../../pstack/skills/statechart/SKILL.md) 會從 TLA+ 模型產生一張 Mermaid 狀態圖，畫出使用者看到的東西，所以圖和被檢查的模型不會脫節。讀者的規則（「離線時你永遠不會看到『已同步』」）會變成不變條件。圖上會標出每個違反規則的狀態，報告會用讀者的語言給出到達它的最短路徑。交接前，agent 會在真實程式碼中重現每條 bug 路徑，這樣建模錯誤就不會被當成 bug 交給讀者。
+[`/statechart`](../../skills/statechart/SKILL.md) 會從 TLA+ 模型產生一張 Mermaid 狀態圖，畫出使用者看到的東西，所以圖和被檢查的模型不會脫節。讀者的規則（「離線時你永遠不會看到『已同步』」）會變成不變條件。圖上會標出每個違反規則的狀態，報告會用讀者的語言給出到達它的最短路徑。交接前，agent 會在真實程式碼中重現每條 bug 路徑，這樣建模錯誤就不會被當成 bug 交給讀者。
 
 ## 開 PR
 
@@ -131,11 +131,11 @@ app 會變，功能地圖會過時。**至少每天跑一次**，最好用排程
 /poteto-mode 開 PR。小而有序的 commit，證據寫在描述裡。
 ```
 
-[開 PR 劇本](../../../pstack/skills/poteto-mode/playbooks/opening-a-pr.md) 會在 worktree 中工作，把成果重整（rebase）成小而有序的 commit、清理 diff、去除文字的 AI 腔，然後回傳 PR 連結。**五個窄的 PR 勝過一個肥大的 PR**，堆疊的後續 PR 勝過一個一直長大的分支。
+[開 PR 劇本](../../skills/poteto-mode/playbooks/opening-a-pr.md) 會在 worktree 中工作，把成果重整（rebase）成小而有序的 commit、清理 diff、去除文字的 AI 腔，然後回傳 PR 連結。**五個窄的 PR 勝過一個肥大的 PR**，堆疊的後續 PR 勝過一個一直長大的分支。
 
 ## 用「看顧」劇本把 PR 推到可合併
 
-PR 一開出來就開始累積阻礙：檢查失敗、審查者留言、主線往前跑。把這些雜事交給[看顧劇本](../../../pstack/skills/poteto-mode/playbooks/babysit.md)：
+PR 一開出來就開始累積阻礙：檢查失敗、審查者留言、主線往前跑。把這些雜事交給[看顧劇本](../../skills/poteto-mode/playbooks/babysit.md)：
 
 ```text
 /poteto-mode 看顧這個 PR。讓它全部變綠。
@@ -157,6 +157,6 @@ PR 一開出來就開始累積阻礙：檢查失敗、審查者留言、主線�
 /poteto-mode 把這串 PR 合併進去。
 ```
 
-[出貨劇本](../../../pstack/skills/poteto-mode/playbooks/shipping.md) 在啟動任何東西之前，會先**獨立**驗證每個 PR。每個 PR 派一個全新的 agent 實際證明行為，而且評判改動的 agent 永遠不是寫它的那個。接著，出貨劇本只會從最底層開始、合併「連續通過驗證」的那一段，一次一個 PR（預設透過 GitHub，有 Origin CLI 時用 Origin），並回報第一個斷掉鏈條的 PR。一個已驗證的 PR 如果疊在未驗證的 PR 上面，就要等，因為合併它會把底下的缺口一起拉進來。
+[出貨劇本](../../skills/poteto-mode/playbooks/shipping.md) 在啟動任何東西之前，會先**獨立**驗證每個 PR。每個 PR 派一個全新的 agent 實際證明行為，而且評判改動的 agent 永遠不是寫它的那個。接著，出貨劇本只會從最底層開始、合併「連續通過驗證」的那一段，一次一個 PR（預設透過 GitHub，有 Origin CLI 時用 Origin），並回報第一個斷掉鏈條的 PR。一個已驗證的 PR 如果疊在未驗證的 PR 上面，就要等，因為合併它會把底下的缺口一起拉進來。
 
 下一頁：[讓工作在你睡覺時進行](./07-overnight.md)。

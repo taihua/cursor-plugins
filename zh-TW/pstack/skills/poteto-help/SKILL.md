@@ -41,7 +41,7 @@ disable-model-invocation: true
 2. 執行 [`/setup-pstack`](../setup-pstack/SKILL.md)。它會詢問推理預算、為每個角色對應一個模型，並寫一份規則。規則會套用到新的聊天。然後，除非專案已經有了，它會各提議一次為專案產生驗證技能和形式驗證技能。
 3. 用 `/poteto-mode`、一個目標和一個能通過或失敗的檢查，開始一個真實的任務。
 
-安裝之後，在使用者呼叫某個技能之前什麼都不會改變。只有 `/setup-pstack` 會從使用者的話語中自動載入。[README](../../README.md) 和[指南第 1 頁](../../docs/guide/01-setup.md)有詳細說明。依 [`references/prompting.md`](references/prompting.md)，提議和他們一起構思第一個提示詞。
+安裝之後，在使用者呼叫某個技能之前什麼都不會改變。只有 `/setup-pstack` 會從使用者的話語中自動載入。[README](../../README.md) 和[指南第 1 頁](../../docs/guide/01-setup.md)有詳細說明。依 [`references/prompting.md`](./references/prompting.md)，提議和他們一起構思第一個提示詞。
 
 如果擔心的是成本，就說明 token 花在哪裡，以及如何少花一點。pstack 會在子代理和審查小組上多花 token。重跑 `/setup-pstack` 並選擇較小的預算或較便宜的模型。設為 `auto` 或 `inherit-parent` 的角色會使用聊天的模型，當聊天跑在 Auto 或較便宜的模型上時能省 token。較短的小組清單會跑較少的子代理，每一項一個。把 `/poteto-mode` 留給需要嚴謹的工作。
 
@@ -51,7 +51,7 @@ pstack 是為 Cursor 打造的，但也能在 Claude Code 中安裝：先 `/plug
 
 ## 用 `/poteto-mode` 開始一個任務
 
-`/poteto-mode` 會把任務對應到一個劇本、把劇本的步驟複製到待辦清單，並在步驟需要時執行其他技能。它跳過的步驟會以 `skip: <原因>` 留在清單中。好的提示詞說明目標以及如何判斷完成。它不列出技能，因為手寫的順序往往會漏掉或打亂劇本本來會保留的步驟。在幫忙構思提示詞之前，先讀 [`references/prompting.md`](references/prompting.md)。[指南第 2 頁](../../docs/guide/02-poteto-mode.md)有範例。
+`/poteto-mode` 會把任務對應到一個劇本、把劇本的步驟複製到待辦清單，並在步驟需要時執行其他技能。它跳過的步驟會以 `skip: <原因>` 留在清單中。好的提示詞說明目標以及如何判斷完成。它不列出技能，因為手寫的順序往往會漏掉或打亂劇本本來會保留的步驟。在幫忙構思提示詞之前，先讀 [`references/prompting.md`](./references/prompting.md)。[指南第 2 頁](../../docs/guide/02-poteto-mode.md)有範例。
 
 `/poteto-mode` 是否保持開啟，取決於使用者如何啟動它：
 
@@ -149,7 +149,7 @@ pstack 沒有規劃技能。Cursor 的 Plan 模式可以和它一起用。對於
 | 整夜執行有動作但什麼都沒完成 | `/loop` 需要一個能通過或失敗的檢查，而不是一段時間長度。見[指南第 7 頁](../../docs/guide/07-overnight.md)。 |
 | 回覆因為建置全綠就宣稱成功 | 要求真實的指令、流程、儲存的值或效能分析。那就是 prove-it-works 原則。 |
 
-對於偏掉的執行，[`references/prompting.md`](references/prompting.md) 有一行就能引導的說法。[指南第 10 頁](../../docs/guide/10-recipes-and-pitfalls.md)有更多陷阱，以及值得複製的食譜。
+對於偏掉的執行，[`references/prompting.md`](./references/prompting.md) 有一行就能引導的說法。[指南第 10 頁](../../docs/guide/10-recipes-and-pitfalls.md)有更多陷阱，以及值得複製的食譜。
 
 ## 把 pstack 變成我自己的
 
@@ -162,4 +162,4 @@ pstack 沒有規劃技能。Cursor 的 Plan 模式可以和它一起用。對於
 
 ## 回覆
 
-以答案開頭。在程式碼區塊中最多給一個範例提示詞，適合時從 [`references/recipes.md`](references/recipes.md) 改編，然後附上那個檔案的連結。保持簡短，除非使用者要求整份地圖。
+以答案開頭。在程式碼區塊中最多給一個範例提示詞，適合時從 [`references/recipes.md`](./references/recipes.md) 改編，然後附上那個檔案的連結。保持簡短，除非使用者要求整份地圖。

@@ -12,7 +12,7 @@
 
 Cursor 會確認 plugin 已安裝。
 
-在 Claude Code 裡，先執行 `/plugin marketplace add cursor/plugins`，再執行 `/plugin install pstack@cursor-plugins`。Claude Code 會在 plugin 指令前加前綴，所以本指南裡的每個指令在那裡都要加 `pstack:`，例如 `/pstack:setup-pstack`（它會把模型規則寫到 `~/.claude/rules/pstack-models.md`）。其他差異請見 [Claude Code 對照說明](../../../pstack/docs/harness/claude-code.md)。
+在 Claude Code 裡，先執行 `/plugin marketplace add cursor/plugins`，再執行 `/plugin install pstack@cursor-plugins`。Claude Code 會在 plugin 指令前加前綴，所以本指南裡的每個指令在那裡都要加 `pstack:`，例如 `/pstack:setup-pstack`（它會把模型規則寫到 `~/.claude/rules/pstack-models.md`）。其他差異請見 [Claude Code 對照說明](../harness/claude-code.md)。
 
 ## 挑選模型
 
@@ -22,7 +22,7 @@ Cursor 會確認 plugin 已安裝。
 /setup-pstack
 ```
 
-[`/setup-pstack`](../../../pstack/skills/setup-pstack/SKILL.md) 會偵測你能用哪些模型、詢問推理預算（reasoning budget）、列出每個角色（寫程式的代理、做判斷的、審查小組），然後問你想怎麼配。回答問題就好。它會寫出 `~/.cursor/rules/pstack-models.mdc`，一份每個 pstack 技能都會讀的小規則檔。
+[`/setup-pstack`](../../skills/setup-pstack/SKILL.md) 會偵測你能用哪些模型、詢問推理預算（reasoning budget）、列出每個角色（寫程式的代理、做判斷的、審查小組），然後問你想怎麼配。回答問題就好。它會寫出 `~/.cursor/rules/pstack-models.mdc`，一份每個 pstack 技能都會讀的小規則檔。
 
 預設以 `xhigh` 推理等級執行，等同於 `large` 預算。`unlimited` 會把每個模型拉到它的最高等級（最高 `max`）：Opus 會到 `max`，Grok 最高只到 `xhigh` 所以維持在那裡。`medium` 和 `small` 會降低推理等級、花更少 token。
 
@@ -32,13 +32,13 @@ Cursor 會確認 plugin 已安裝。
 
 ## 要不要接受「驗證技能」的提議
 
-設定的最後，`/setup-pstack` 會在你的專案裡找能證明 app 行為的方法：一個 `verify-*` 技能，或既有的測試框架。如果都找不到，它會提議一次，用 [`/create-verification-skill`](../../../pstack/skills/create-verification-skill/SKILL.md) 幫你產生一個。
+設定的最後，`/setup-pstack` 會在你的專案裡找能證明 app 行為的方法：一個 `verify-*` 技能，或既有的測試框架。如果都找不到，它會提議一次，用 [`/create-verification-skill`](../../skills/create-verification-skill/SKILL.md) 幫你產生一個。
 
 答應的話，它會寫出 `.cursor/skills/verify-<app>/`，一個專案專用的技能，教 agent 像真正的使用者一樣操作你的 app。交給你之前，它會先證明這個技能確實能跑一次。拒絕的話，設定就繼續往下。你隨時都可以自己執行 `/create-verification-skill`。[驗證並出貨](./06-verify-and-ship.md#建立專案驗證技能) 有深入說明。
 
 **如果你是 pstack 新手，請答應。** 能自己檢查成果的 agent 會一直做到檢查通過為止；不能檢查的 agent 則會把每個結果丟回給你手動檢查。在這整份指南中，驗證技能是回報最大的一項。
 
-接著，除非專案已經有了，設定會再提議一次，用 [`/create-formal-verification-skill`](../../../pstack/skills/create-formal-verification-skill/SKILL.md) 產生「形式驗證」技能。測試只會檢查有人想到要寫的情況；形式驗證技能則會在明確的範圍內，檢查你程式碼的**某一個關鍵性質**在**所有情況**下都成立，例如「同一個工作永遠不會同時執行兩次」。如果你的程式有並行、重試、狀態機或解析器——也就是 bug 代價高、而測試很少碰到出錯情況的地方——就答應。否則就拒絕，之後情況改變再執行。[驗證並出貨](./06-verify-and-ship.md#用形式驗證技能證明一個性質) 有說明。
+接著，除非專案已經有了，設定會再提議一次，用 [`/create-formal-verification-skill`](../../skills/create-formal-verification-skill/SKILL.md) 產生「形式驗證」技能。測試只會檢查有人想到要寫的情況；形式驗證技能則會在明確的範圍內，檢查你程式碼的**某一個關鍵性質**在**所有情況**下都成立，例如「同一個工作永遠不會同時執行兩次」。如果你的程式有並行、重試、狀態機或解析器——也就是 bug 代價高、而測試很少碰到出錯情況的地方——就答應。否則就拒絕，之後情況改變再執行。[驗證並出貨](./06-verify-and-ship.md#用形式驗證技能證明一個性質) 有說明。
 
 設定完成後，**開一個新的聊天視窗**。模型規則只會套用在新的工作階段。
 

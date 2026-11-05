@@ -52,7 +52,7 @@
 - 預算：`<輪詢、判定等待、後續追蹤、重現、拒絕、修正>`
 - 選用的 bot token 能力：`<無、檔案下載，或可編輯的維運狀態>`
 
-從 [`configuration.example.yaml`](../../../../pstack/automations/benny/templates/configuration.example.yaml) 和 [`feature-map.example.md`](./skills/reproduce-and-fix-issues/references/feature-map.example.md) 開始。把它們複製到這個套件之外並填好，例如放在 `.cursor/benny/` 底下。把機密值放在機密管理器或環境變數中。
+從 [`configuration.example.yaml`](./templates/configuration.example.yaml) 和 [`feature-map.example.md`](./skills/reproduce-and-fix-issues/references/feature-map.example.md) 開始。把它們複製到這個套件之外並填好，例如放在 `.cursor/benny/` 底下。把機密值放在機密管理器或環境變數中。
 
 ## 給 agent
 
