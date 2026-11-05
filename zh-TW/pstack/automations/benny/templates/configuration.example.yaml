@@ -1,0 +1,100 @@
+# 設定範例（configuration.example.yaml）的中文說明版
+# 這份檔案只在每個區塊上方加了中文註解，鍵與值保持原樣。
+# 實際使用時，複製原始的英文範例到 .cursor/benny/ 之類的位置再填寫。
+#
+# automations：兩個自動化的名稱
+# slack：來源頻道、維運頻道、分類身分，以及各種 Slack 動作；
+#        allow_source_root_posts / allow_worker_slack_writes 必須保持 false
+# repository：repo 網址、預設分支、開草稿 PR 的動作；draft_only 必須為 true
+# tracker：議題追蹤系統（例如 Linear）的團隊、專案、標籤與狀態
+# routing：導向地圖路徑；通知負責人預設關閉
+# control：control 技能名稱、功能地圖路徑、測試環境、證據存放位置
+# verdict_markers：分類判定的三種標記
+# status_emoji：各種狀態用的 emoji
+# budgets：輪詢間隔與各階段的時間預算（秒 / 分鐘）
+# models：各角色使用的模型 slug（必須是你帳號可用的）
+
+schema_version: 1
+
+automations:
+  triage_name: "benny-triage"
+  reproduce_name: "benny-reproduce"
+
+slack:
+  source_channel_id: "SOURCE_CHANNEL_ID"
+  operations_channel_id: ""
+  triage_identity_user_id: "TRIAGE_IDENTITY_USER_ID"
+  read_action: "configured-slack-read-action"
+  thread_post_action: "configured-slack-thread-post-action"
+  file_download_action: "configured-slack-file-download-action"
+  operations_edit_action: "configured-slack-edit-action"
+  prefer_cursor_actions: true
+  optional_bot_token_env: "BENNY_SLACK_BOT_TOKEN"
+  allow_source_root_posts: false
+  allow_worker_slack_writes: false
+
+repository:
+  url: "https://github.com/example-org/example-repo"
+  default_branch: "main"
+  pull_request_action: "configured-draft-pull-request-action"
+  pull_request_url_format: "https://github.com/{owner}/{repo}/pull/{number}"
+  draft_only: true
+
+tracker:
+  type: "linear"
+  adapter_skill_name: "issue-tracker-adapter-placeholder"
+  team: "team-placeholder"
+  project: "project-placeholder"
+  labels:
+    bug: "bug-label-placeholder"
+    performance: "performance-label-placeholder"
+    intake: "intake-label-placeholder"
+    needs_repro: "needs-repro-label-placeholder"
+  status: "intake-status-placeholder"
+  source_link_title: "Slack report"
+  require_compensation_action: true
+
+routing:
+  map_path: ".cursor/benny/routing.md"
+  owner_pings_default: false
+  allow_feature_owner_ping: false
+  allow_confirmed_regression_author_ping: false
+
+control:
+  skill_name: "control-target-app"
+  feature_map_path: ".cursor/benny/feature-map.md"
+  environment: "safe-test-environment-placeholder"
+  artifact_directory: "/tmp/benny-artifacts"
+  artifact_retention_hours: 24
+
+verdict_markers:
+  bug: "[benny:bug]"
+  performance: "[benny:performance]"
+  other: "[benny:other]"
+  tracker_attribute: "tracker"
+
+status_emoji:
+  seen: "👀"
+  reproducing: "🔎"
+  reproduced: "✅"
+  could_not_reproduce: "⚪"
+  blocked: "⛔"
+  fixing: "🛠️"
+  fix_failed: "❌"
+  pull_request_opened: "🔗"
+
+budgets:
+  poll_seconds: 45
+  verdict_wait_minutes: 45
+  triage_follow_up_minutes: 10
+  triage_total_minutes: 30
+  repro_minutes: 60
+  rejection_window_minutes: 10
+  fix_minutes: 90
+  operations_follow_up_minutes: 45
+
+models:
+  triage: "choose-an-available-public-model-slug"
+  reproduce: "choose-an-available-public-model-slug"
+  code: "choose-an-available-public-model-slug"
+  media_review: "choose-an-available-public-model-slug"
