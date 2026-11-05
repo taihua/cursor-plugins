@@ -44,7 +44,7 @@ node zh-TW/tools/sync.mjs mark pstack/skills/how/SKILL.md
 2. 對每個過期的檔案，只把英文改到的部分翻進對應的 zh-TW 檔案，其他段落不要動。翻譯風格沿用既有的中文檔（專有名詞、指令、檔名、程式碼保留英文）。
 3. 新增的英文檔就照同樣風格新翻；官方刪掉的檔案就把中文版刪掉。
 4. 跑 node zh-TW/tools/sync.mjs mark --all，再跑一次 status 確認全部歸零。
-5. commit 並 push 到 `zh-TW` 分支。
+5. 從 `zh-TW` 開一個新分支 commit 並 push，再發 PR 到 `zh-TW`。
 ```
 
 ## 對應規則
@@ -55,4 +55,10 @@ node zh-TW/tools/sync.mjs mark pstack/skills/how/SKILL.md
 
 ## 每週自動同步
 
-每週一早上 08:34（台灣時間）有一個 Claude Code 排程任務會自動跑上面的流程：官方有改動就翻好並 push 到 `zh-TW` 分支，沒有改動就什麼都不做。要調整時間或停用，到 claude.ai/code 的排程任務列表修改即可。
+每週一早上 08:34（台灣時間）有一個 Claude Code 排程任務會自動跑上面的流程：
+
+- 官方有改動時，它從 `zh-TW` 開一個 `zh-TW-sync/<日期>` 分支，翻好後發 PR 到 `zh-TW`。你審過再自己合併，排程永遠不會自己合併。
+- 上週的同步 PR 還沒合併的話，它會把新的改動追加到同一個 PR，不會另開一個互相衝突的 PR。
+- 官方沒有改動時，它什麼都不做。
+
+要調整時間或停用，到 claude.ai/code 的排程任務列表修改即可。
