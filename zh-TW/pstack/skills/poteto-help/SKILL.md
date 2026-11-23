@@ -47,11 +47,11 @@ disable-model-invocation: true
 
 pstack 是為 Cursor 打造的，但也能在 Claude Code 中安裝：先 `/plugin marketplace add cursor/plugins`，再 `/plugin install pstack@cursor-plugins`。在那裡，每個指令都要加 `pstack:` 前綴，例如 `/pstack:poteto-mode`。[Claude Code 對照說明](../../docs/harness/claude-code.md)列出 Cursor 名稱的對應，而需要 Cursor 專屬功能（例如 Bugbot 或 Automations）的步驟會被跳過，並附上一行說明。
 
-其他工具也能讀這些技能，因為它們使用 Agent Skills 格式。但大部分工作流程技能，包括 `/poteto-mode`、`/how`、`/why` 和 `/teach`，都會用各角色的模型派出 Cursor 子代理，而自訂模式和 `/loop` 是 Cursor 的功能，所以那些部分在別處可能無法運作。
+其他工具也能讀這些技能，因為它們使用 Agent Skills 格式。但大部分工作流程技能，包括 `/poteto-mode`、`/how` 和 `/teach`，都會派出 Cursor 子代理（有些會用各角色的模型），而自訂模式和 `/loop` 是 Cursor 的功能，所以那些部分在別處可能無法運作。
 
 ## 用 `/poteto-mode` 開始一個任務
 
-`/poteto-mode` 會把任務對應到一個劇本、把劇本的步驟複製到待辦清單，並在步驟需要時執行其他技能。它跳過的步驟會以 `skip: <原因>` 留在清單中。好的提示詞說明目標以及如何判斷完成。它不列出技能，因為手寫的順序往往會漏掉或打亂劇本本來會保留的步驟。在幫忙構思提示詞之前，先讀 [`references/prompting.md`](./references/prompting.md)。[指南第 2 頁](../../docs/guide/02-poteto-mode.md)有範例。
+`/poteto-mode` 會把任務對應到一個劇本、把劇本的步驟複製到待辦清單，並在步驟需要時執行其他技能。好的提示詞說明目標以及如何判斷完成。它不列出技能，因為手寫的順序往往會漏掉或打亂劇本本來會保留的步驟。在幫忙構思提示詞之前，先讀 [`references/prompting.md`](./references/prompting.md)。[指南第 2 頁](../../docs/guide/02-poteto-mode.md)有範例。
 
 `/poteto-mode` 是否保持開啟，取決於使用者如何啟動它：
 
@@ -108,16 +108,15 @@ pstack 是為 Cursor 打造的，但也能在 Claude Code 中安裝：先 `/plug
 
 - `/how` 解釋程式碼做什麼。`/why` 解釋原因。`/teach` 跑其中一個或兩個，並用白話解釋結果。
 - `/arena` 給每個 worker 同一份需求，並合併最好的部分。`/swarm` 把工作分成區塊或競賽，並回傳一份報告。
-- `/architect` 在定好設計後會直接實作。加上「with checkpoint」可以在它寫程式之前審查設計。
 - `/interrogate` 審查 diff。`/blast-radius` 尋找 diff 以外的破壞，並證明讓改動安全的那個關鍵事實。
 - `/recall` 跨最近的聊天重建脈絡。`/ketchup` 只涵蓋這個聊天自從使用者上一則訊息之後的內容。接續某一個特定的聊天或分支是 Session pickup 劇本。
-- `/figure-it-out` 設計一次嚴謹的執行。Orchestrate 劇本執行一個橫跨多天、很多 PR 的計畫。Autonomous run 劇本把一個任務推到一個完成條件。
+- `/figure-it-out` 設計一次嚴謹的執行。Autonomous run 劇本把一個任務推到一個完成條件。
 
 不在 pstack 中的：
 
 - `/deslop`、`control-cli` 和 `control-ui` 在 `cursor-team-kit` plugin 中。
 - `/loop` 和 `/create-skill` 是 Cursor 內建的。
-- pstack 沒有 `/orchestrate` 技能。Orchestrate 是 `/poteto-mode` 的一個劇本。如果斜線選單出現 `/orchestrate`，那是別的 plugin 提供的。
+- pstack 沒有 `/orchestrate` 技能。如果斜線選單出現 `/orchestrate`，那是別的 plugin 提供的。
 
 ## 劇本與原則
 
@@ -130,7 +129,7 @@ pstack 是為 Cursor 打造的，但也能在 Claude Code 中安裝：先 `/plug
 - 「full autopilot on this queue」執行 Autopilot-full。「autopilot, don't merge」執行 Autopilot-stack。
 - 「run the eval playbook」執行 Eval。
 
-沒有 `/poteto-mode` 的話，像「babysit this pr」這樣的說法可能會改為啟動 Cursor 自己做同樣工作的技能。[`poteto-mode`](../poteto-mode/SKILL.md) 的「劇本」章節列出每個劇本以及它何時適用。[指南第 6 頁](../../docs/guide/06-verify-and-ship.md)涵蓋開 PR、看顧 PR 和合併 PR。
+沒有 `/poteto-mode` 的話，像「babysit this pr」這樣的說法可能會改為啟動 Cursor 自己做同樣工作的技能。[`poteto-mode`](../poteto-mode/SKILL.md) 的「劇本」章節列出每個劇本。[指南第 6 頁](../../docs/guide/06-verify-and-ship.md)涵蓋開 PR、看顧 PR 和合併 PR。
 
 pstack 沒有規劃技能。Cursor 的 Plan 模式可以和它一起用。對於跨階段或堆疊 PR 的工作，請 `/poteto-mode` 做計畫會執行[多階段計畫劇本](../poteto-mode/playbooks/multi-phase-plan.md)，它寫計畫但不實作。對於設計問題，原型劇本或 `/architect` 會先用程式碼解決它。
 

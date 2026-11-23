@@ -30,7 +30,7 @@ disable-model-invocation: true
 
 - 在工作開始前建好驗證工具，並從改動前的狀態擷取基準，讓檢查讀起來是「舊值 vs 新值」。
 - 對於單向門的設計決策，執行 **architect** 技能（它會執行 **arena**）。對於形狀已經很具體的機械式工作就跳過。對已經定案的設計再跑一次 arena 是過度工程（**laziness-protocol** 原則技能）。
-- 決定什麼要分派出去。只沿著接縫平行化，並給每個 worker 自己的 worktree 或分支（**separate-before-serializing-shared-state** 原則技能）。不要過度分派。依 **poteto-mode** 技能的「子代理」章節，為每個子代理選擇工作需要的推理等級與快速或標準速度。
+- 決定什麼要分派出去。只沿著接縫平行化，並給每個 worker 自己的 worktree 或分支（**separate-before-serializing-shared-state** 原則技能）。不要過度分派。依 **poteto-mode** 技能的「子代理」章節，為每個子代理選擇工作需要的推理等級。
 - 把設計好的階段清單寫下來。那份清單就是人類要審查的東西。
 
 然後執行這個設計。把它的步驟作為具體項目，加到待辦清單中 Phase C 和 Phase D 之間。每一步都以 Phase C 的迴圈紀律執行，並把 Phase D 的紀錄穿插其中——每落地一步就記一列——而不是把整份紀錄留到最後才寫。

@@ -12,7 +12,7 @@ pstack 的技能使用 Cursor 的名稱。在 Claude Code 中，每個工作階�
 | --- | --- |
 | `Task` | `Agent` |
 | `AskQuestion` | `AskUserQuestion`。在 `-p` 模式下它不存在，所以用一般文字提問。 |
-| 開一份待辦清單 | 如果工作階段提供 `TodoWrite` 就用它。否則把清單放在你的回覆中，並在每個階段更新。 |
+| 開一份待辦清單，或把步驟複製到待辦清單工具中 | 如果工作階段提供 `TodoWrite` 就用它。否則把清單放在你的回覆中，並在每個階段更新。 |
 | 執行另一個 pstack 技能（`/name` 或「**name** 技能」） | `Read` `<pstack>/skills/<name>/SKILL.md` 並遵循它。`Skill` 工具會拒絕大部分 pstack 技能。當你告訴使用者要輸入它時，寫 `/pstack:<name>`。 |
 | `Grep`、`Glob` | 當工作階段沒有 `Grep` 或 `Glob` 時，用 `Bash` 搭配 `rg`。 |
 
@@ -22,6 +22,7 @@ pstack 的技能使用 Cursor 的名稱。在 Claude Code 中，每個工作階�
 | --- | --- |
 | `subagent_type: generalPurpose` | `subagent_type: "general-purpose"` |
 | `poteto-agent`、`comment-sicko` | `pstack:poteto-agent`、`pstack:comment-sicko` |
+| `poteto-agent` 檔案中的 `model:` 行 | 它寫的是 Cursor 的 slug。每次用 `Agent` 派出 `pstack:poteto-agent` 時，都要依「模型」表對照後傳入 `model` 和 `effort`，讓那個 slug 永遠不會送到 API。 |
 | `readonly: true` | `subagent_type: "Explore"`。它保留 `Bash`，所以任務說明中也要寫「不要修改檔案」，並在之後檢查 `git status`。 |
 | `readonly: false` | `general-purpose`。它保留工作階段的 MCP 伺服器。 |
 | `environment: "cloud"` | `isolation: "worktree"`。寫明 worker 要 checkout 的分支或 commit。 |
@@ -36,7 +37,7 @@ pstack 的技能使用 Cursor 的名稱。在 Claude Code 中，每個工作階�
 | Cursor | Claude Code |
 | --- | --- |
 | `claude-<family>-<version>-<effort>[-fast]`，例如 `claude-opus-5-5-xhigh` | `model: "opus"` 和 `effort: "xhigh"`。`model` 只接受 `opus`、`sonnet`、`haiku`、`fable`。拿掉 `-fast`。 |
-| `grok-*`、`gpt-*` 或其他非 Claude 的 slug | 省略 `model`，讓 agent 使用工作階段的模型，並說明這一點。 |
+| `gemini-*` 或其他非 Claude 的 slug | 省略 `model`，讓 agent 使用工作階段的模型，並說明這一點。 |
 | `auto` 或 `inherit-parent` | 省略 `model`。 |
 | `pstack-models.mdc` 規則，`~/.cursor/rules/pstack-models.mdc` | `~/.claude/rules/pstack-models.md`。Claude Code 會把它載入每個新的工作階段，所以它的角色設定行已經在上下文中。如果不在，就讀這個檔案。如果檔案或該角色的設定行不存在，就使用技能的預設 slug。 |
 | 角色值 `<model> <effort>`，例如 `opus high` | `model: "opus"` 和 `effort: "high"`。 |
@@ -46,7 +47,7 @@ pstack 的技能使用 Cursor 的名稱。在 Claude Code 中，每個工作階�
 Claude Code 會把 `~/.claude/rules/` 中的每個 `.md` 檔案載入每個新的工作階段，所以 `setup-pstack` 會把它的規則寫在那裡。遵循它的步驟，並做以下改變：
 
 - 偵測。偵測到的模型是 `Agent` 工具 schema 列出的 `model` 值，每個搭配它的 `effort` 值中的一個推理等級。把真實的模型寫成 `<model> <effort>`，例如 `opus xhigh`。推理等級是最後一個 token，所以預算步驟照原樣就能運作。
-- 預設值。用上面的列對照每個預設 slug：`claude-opus-5-5-xhigh` 是 `opus xhigh`，`grok-4.7-xhigh-fast` 是 `inherit-parent`。
+- 預設值。用上面的列對照每個預設 slug：`claude-opus-5-5-xhigh-fast` 是 `opus xhigh`，`claude-opus-5-5-high-fast` 是 `opus high`，`claude-fable-5-2-high` 是 `fable high`，`gemini-4-neon-xhigh` 是 `inherit-parent`。
 - 寫入。寫入 `~/.claude/rules/pstack-models.md`，不加 frontmatter，然後是註解行、`# budget` 行，以及第 5 步中每個角色一行。覆寫整個檔案。永遠不要把角色設定行放在 `CLAUDE.md` 或 `AGENTS.md` 中。
 
 ## 路徑

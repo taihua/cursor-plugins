@@ -44,7 +44,7 @@ Claude Code 安裝的是 pstack 的「自動產生副本」（包含這份 READM
 
 第一次用？[pstack 新手指南（中文）](./docs/guide/README.md) 會帶你完成第一個真實任務，從設定、下提示詞，到驗證和整夜自動執行。卡住了，或不確定該用哪個技能？問 [`/poteto-help`](./skills/poteto-help/SKILL.md)。
 
-就這樣。其他技能都是「看情況用」，而 `poteto-mode` 會在需要時自動幫你呼叫。預設設定會依模型強項分工：寫程式的工作（新功能、重構、修 bug、效能、爬坡優化）交給 Grok，最難的改動、文字撰寫和判斷交給 Opus 5.5。預設的審查小組是 Opus 5.5 / Grok。用 [`/setup-pstack`](./skills/setup-pstack/SKILL.md) 可以改任何一項。
+就這樣。其他技能都是「看情況用」，而 `poteto-mode` 會在需要時自動幫你呼叫。預設設定下，寫程式的工作（新功能、重構、修 bug、效能、爬坡優化）、文字撰寫和判斷都交給 xhigh 推理等級的 Opus 5.5，而且沒有任何角色會超過 xhigh。在審查小組之外，Fable 5.2 只有在你指名要用它，或同一份任務說明交給 Opus 5.5 執行兩次都失敗後才會上場。預設的審查小組是 Fable 5.2 / Opus 5.5 / Gemini 4 Neon。用 [`/setup-pstack`](./skills/setup-pstack/SKILL.md) 可以改任何一項。
 
 ## 使用方式
 
@@ -54,7 +54,7 @@ Claude Code 安裝的是 pstack 的「自動產生副本」（包含這份 READM
 
 ### 用 `/poteto-mode` 就對了
 
-這個技能是最主要的捷徑。只要我需要 agent 做嚴謹的工程工作，就用它。它附帶二十三個劇本：
+這個技能是最主要的捷徑。只要我需要 agent 做嚴謹的工程工作，就用它。它附帶二十二個劇本：
 
 ```
 /poteto-mode 這個 PR 有個隱藏 bug：即使閒置，畫面捲動位置每 750ms 就會飄移。先重現，再修正並驗證。
@@ -65,7 +65,7 @@ Claude Code 安裝的是 pstack 的「自動產生副本」（包含這份 READM
 ```
 
 <details>
-<summary>二十三個劇本</summary>
+<summary>二十二個劇本</summary>
 
 | 劇本 | 用途 |
 |---|---|
@@ -84,7 +84,6 @@ Claude Code 安裝的是 pstack 的「自動產生副本」（包含這份 READM
 | [babysit（看顧 PR）](./skills/poteto-mode/playbooks/babysit.md) | 把一個 PR 或一串 PR 推到可合併狀態：處理衝突、審查留言、CI。 |
 | [shipping（出貨）](./skills/poteto-mode/playbooks/shipping.md) | 獨立驗證已經全綠的 PR 堆疊，再從最底層開始，把連續通過驗證的部分依序合併（預設透過 GitHub，有 Origin 時用 Origin）。 |
 | [autonomous run（自主執行）](./skills/poteto-mode/playbooks/autonomous-run.md) | 不中斷地把一個長任務做到完成。 |
-| [orchestrate（統籌）](./skills/poteto-mode/playbooks/orchestrate.md) | 交給一個「協調者」聊天視窗的長期專案：跨多天、很多堆疊 PR、一大群子代理。 |
 | [autopilot-full（全自動駕駛）](./skills/poteto-mode/playbooks/autopilot-full.md) | 把多個獨立 PR 一路做到合併，每個 PR 一個負責人。程式就緒時由一群驗證者檢查，之後每次修改都會再被重新檢查。 |
 | [autopilot-stack（自動駕駛，不合併）](./skills/poteto-mode/playbooks/autopilot-stack.md) | 跟 autopilot-full 一樣，但不合併。做好並驗證 PR 讓你自己審查與合併；只有真的相依時才把 PR 疊在另一個上面。 |
 | [session pickup（接手工作）](./skills/poteto-mode/playbooks/session-pickup.md) | 接續或接手先前 agent 做到一半的工作。 |
@@ -109,7 +108,7 @@ Claude Code 安裝的是 pstack 的「自動產生副本」（包含這份 READM
 
 ## 技能
 
-[`/poteto-mode`](./skills/poteto-mode/SKILL.md) 會在步驟需要時自動執行大部分技能（`how`、`why`、`architect`、`arena`、`swarm`、`interrogate`、`unslop`、`no-comments`、`technical-writing`、`tdd` 以及各項原則）。下表是給你想**直接**呼叫某個技能時參考：
+[`/poteto-mode`](./skills/poteto-mode/SKILL.md) 會在步驟需要時自動執行大部分技能（`why`、`architect`、`arena`、`swarm`、`interrogate`、`unslop`、`no-comments`、`technical-writing`、`tdd` 以及各項原則）。下表是給你想**直接**呼叫某個技能時參考：
 
 ```
 /how 我們怎麼取消執行中的工作？查詢每個要取消的工作時有沒有 N+1 問題？
@@ -127,9 +126,9 @@ Claude Code 安裝的是 pstack 的「自動產生副本」（包含這份 READM
 | [`/poteto-mode`](./skills/poteto-mode/SKILL.md) | 任何不簡單的任務的預設入口。 |
 | [`/poteto-help`](./skills/poteto-help/SKILL.md) | 你是 pstack 新手，或不確定該用哪個技能、劇本或原則。它會先搞清楚你想做什麼，回答那部分，再給你一段可以直接送出的提示詞。只有你親自輸入 `/poteto-help` 才會執行。 |
 | [`/in-your-own-words`](./skills/in-your-own-words/SKILL.md) | 你希望 agent 開始前，先用自己的話複述你的目標和問題。只有你親自輸入才會執行。 |
-| [`/sharpen`](./skills/sharpen/SKILL.md) | 送出前想讓提示詞「更深」而不是「更長」：頂尖專家會做哪些你沒要求的事、他們會從什麼原始材料開始、用什麼方法和工具、以及有什麼外部檢查能證明結果正確。它交回改寫後的提示詞，保留你的選擇空間，但**不會**去做任務本身。只有你親自輸入才會執行。 |
+| [`/sharpen`](./skills/sharpen/SKILL.md) | 送出前想讓提示詞「更深」而不是「更長」：頂尖專家會做哪些你沒要求的事、他們會從什麼原始材料開始、用什麼方法和工具、以及有什麼外部檢查能證明結果正確。它交回改寫後的提示詞：凡是能靠實驗決定的選擇，都請 agent 先做原型（prototype）來決定；產品方向和個人偏好的選擇則留給你。它**不會**去做任務本身。只有你親自輸入才會執行。 |
 | [`/how`](./skills/how/SKILL.md) | 想要一個子系統「怎麼運作」的導覽。 |
-| [`/why`](./skills/why/SKILL.md) | 想知道某個東西「為什麼」這樣做。它會在執行時找出可用的 MCP，平行查詢各類證據來源（版本控制、議題追蹤、長文件、即時聊天、基礎設施監控、錯誤追蹤、分析資料倉儲）。 |
+| [`/why`](./skills/why/SKILL.md) | 想知道某個東西「為什麼」這樣做。它從紀錄而不是從程式碼找答案：引入這段程式、以及之後每次修改它的 commit 和 PR 討論；這條線索太少時，再去查其他來源。它會引用作者寫下的原話、標明哪些是自己的推論，並說清楚紀錄回答不了什麼。 |
 | [`/recall`](./skills/recall/SKILL.md) | 開始或回到某項工作時，想從你自己的聊天紀錄和共享紀錄重建最近的脈絡，整理成一份精簡的現況摘要。 |
 | [`/ketchup`](./skills/ketchup/SKILL.md) | 想知道從你上一則訊息之後，這個聊天裡發生了什麼變化：用白話和小圖示說明，並列出每一件等你決定的事，讓你光看回覆就能決定（即使回覆因此變長）。 |
 | [`/ketchup-video`](./skills/ketchup-video/SKILL.md) | 跟 `/ketchup` 一樣，但做成有字幕的投影片短片，等你決定的事則以文字列在下面。 |
@@ -263,7 +262,7 @@ Cursor 本身已經有很棒的 Plan 模式，跟 pstack 搭配得很好。但�
 
 模型也可以設定。輸入 [`/setup-pstack`](./skills/setup-pstack/SKILL.md)。它會偵測你可用的模型，寫一份小小的「永遠套用」規則，把每個角色（寫程式、判斷、審查小組）對應到一個模型。每個技能都會讀這份規則；沒有規則時則使用合理的預設值，所以你只需要覆寫你在意的部分。
 
-當預設值改變時，在改變之前寫的規則仍會釘住舊的預設值。刪掉那些角色的設定行（或刪掉整個檔案），再重新執行 `/setup-pstack`。重新執行時，模型跟預設不同的角色會被保留。
+當預設值改變時，在改變之前寫的規則仍會釘住舊的預設值，直到你重新執行 `/setup-pstack`。重新執行時，它會替換掉認得出來的舊預設值，並保留其他模型跟預設不同的角色。要拿掉它認不出來的釘選，請先刪掉那個角色的設定行，或刪掉整個檔案。
 
 ## 自動化
 

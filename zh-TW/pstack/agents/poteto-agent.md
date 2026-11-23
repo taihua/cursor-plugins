@@ -2,6 +2,7 @@
 name: poteto-agent
 description: 在 `/poteto-mode` 執行期間派出、負責寫程式和輔助任務的代理子代理。用於委派，而不是作為 `/poteto-mode` 本身的執行者。每個新任務派出一個全新的 `poteto-agent`，只有在 poteto-mode「子代理」章節指名的嚴格情況下才接續一個既有的。在做任何工作之前，完整讀過 `poteto-mode` 技能的 `SKILL.md`，包括它內嵌的原則索引。改用 `generalPurpose` 會跳過這次閱讀並逐漸偏離。
 is_background: true
+model: claude-opus-5-5-xhigh-fast
 ---
 
 > 本文為 [`pstack/agents/poteto-agent.md`](../../../pstack/agents/poteto-agent.md) 的繁體中文翻譯，僅供閱讀理解。agent 實際執行時讀的是英文原檔。

@@ -24,7 +24,7 @@
 |:--|:--|
 | [`pstack/README.md`](./pstack/README.md) | pstack 介紹 |
 | [`pstack/docs/guide/`](./pstack/docs/guide/README.md) | 新手指南 10 頁 |
-| [`pstack/skills/poteto-mode/`](./pstack/skills/poteto-mode/SKILL.md) | 主技能，加上 23 個[劇本](./pstack/skills/poteto-mode/playbooks/) |
+| [`pstack/skills/poteto-mode/`](./pstack/skills/poteto-mode/SKILL.md) | 主技能，加上 22 個[劇本](./pstack/skills/poteto-mode/playbooks/) |
 | [`pstack/skills/`](./pstack/skills/) | 全部 58 個技能（34 個指令技能 + 24 條原則），含各自的參考檔 |
 | [`pstack/agents/`](./pstack/agents/) | `poteto-agent` 和 Comment Sicko 兩個子代理 |
 | [`pstack/automations/benny/`](./pstack/automations/benny/README.md) | benny 自動化套件（Slack 問題回報的分類與修正） |
@@ -35,7 +35,7 @@
 - **只是給人讀的。** AI 執行時讀的仍然是英文原檔，所以這些中文檔案不會改變 pstack 的行為。原版更新時，中文版不會自動同步。
 - **專有名詞、指令、檔名、程式碼保留英文。** 例如 `poteto-mode`、`worktree`、`/loop`。第一次出現的術語會在括號中附上中文。
 - **程式碼沒有翻譯。** 腳本（`.ts`、`.mjs`、`.sh`）、測試資料和圖片只保留在原版中，中文檔案裡的連結會直接指回原檔。
-- **給 agent 的提示詞模板**（例如 `reflect`、`why`、`how` 的 `references/`）也翻成中文方便理解，但實際使用時以英文原版為準。這類檔案的開頭都有標註。
+- **給 agent 讀的規則與參考檔**（例如 `poteto-mode/worker.md`）也翻成中文方便理解，但實際使用時以英文原版為準。這類檔案的開頭都有標註。
 - 每個 `SKILL.md` 開頭都有一行連結，可以回到對應的英文原檔對照閱讀。
 - **官方更新時怎麼跟上：** 見 [SYNC.md](./SYNC.md)。
 
@@ -82,18 +82,18 @@ Plugin（外掛）是一包可以裝進 Cursor（或 Claude Code）的擴充功�
 
 | 類別 | Plugin |
 |:--|:--|
-| Google 系列 | Gmail（郵件）、Google Drive（雲端硬碟）、Google Calendar（行事曆）、Google Docs（文件）、Google Sheets（試算表）、Google Slides（簡報）、Google Ads（廣告）、Google Cloud BigQuery（資料倉儲查詢） |
+| Google 系列 | Gmail（郵件）、Google Drive（雲端硬碟）、Google Calendar（行事曆）、Google Docs（文件）、Google Sheets（試算表）、Google Slides（簡報）、Google Ads（廣告）、Google Analytics（網站分析）、Google Search Console（搜尋成效）、Google Cloud BigQuery（資料倉儲查詢） |
 | 微軟系列 | Teams、SharePoint、Power BI、Dynamics 365 Business Central |
-| 開發與測試 | GitHub、Playwright（真實瀏覽器操作與測試）、Statsig（功能開關與實驗）、Tailscale（私有網路）、ServiceNow、Vanta（法遵） |
-| 業務與 CRM | Salesforce、HubSpot、Attio、Zoho CRM、Zoho Desk、HighLevel、Gong、Outreach、Amplemarket、Clay、Hunter |
-| 行銷與廣告 | Klaviyo、Customer.io、MailerLite、Brevo、Semrush、Ahrefs、Similarweb、Profound、Meltwater、Meta Ads、X Ads、TikTok for Business |
+| 開發與測試 | GitHub、Playwright（真實瀏覽器操作與測試）、Statsig（功能開關與實驗）、Tailscale（私有網路）、ServiceNow、Vanta（法遵）、Runta（agent 執行環境）、CreateOS（部署平台）、Sabre Developer Hub（旅遊 API 文件） |
+| 業務與 CRM | Salesforce、HubSpot、Attio、Zoho CRM、Zoho Desk、HighLevel、Gong、Outreach、Amplemarket、Clay、Hunter、Close、Item、Front（共用收件匣） |
+| 行銷與廣告 | Klaviyo、Customer.io、MailerLite、Brevo、Semrush、Ahrefs、Similarweb、Profound、Meltwater、Meta Ads、X Ads、TikTok for Business、Mixpanel（產品分析）、Metricool（社群經營） |
 | 人資與招募 | Ashby、Workable、Juicebox、Upwork、Workday、Rippling、Gusto |
 | 會議與筆記 | Zoom、Fireflies、Otter.ai、Fathom、Circleback、Craft、Mem、Readwise、Coda、Guru（知識庫） |
 | 專案與任務 | Todoist、Smartsheet、Wrike、Calendly、Lark、Lark Base、Feishu（飛書） |
 | 表單與文件簽署 | Typeform、Jotform、Docusign |
-| 財務與會計 | QuickBooks Online、Xero、Zoho Books、Brex、Navan、Square、Jobber、Finance、Finary、OnePay |
-| 投資與券商 | Robinhood、Coinbase、eToro、Interactive Brokers、Webull、Questrade、S&P Global、PitchBook、Daloopa、X Money |
-| 其他 | X（推特）、WhatsApp Business、RingCentral Phone / Chat、Shopify、Gopuff、GoDaddy、Gamma（生成簡報）、Excalidraw（手繪圖表）、Framer（網站）、Stable（郵件掃描）、Databricks Genie One |
+| 財務與會計 | Intuit QuickBooks、Xero、Zoho Books、NetSuite、SAP S/4HANA Cloud、Rillet、Brex、Navan、Square、PayPal、Expensify、Finance、Finary、OnePay |
+| 投資與券商 | Robinhood、Coinbase、eToro、Interactive Brokers、Webull、Questrade、S&P Global、PitchBook、Daloopa、FactSet、Fiscal.ai、X Money |
+| 其他 | X（推特）、WhatsApp Business、RingCentral Phone / Chat、Shopify、Gopuff、GoDaddy、Gamma（生成簡報）、Excalidraw（手繪圖表）、Stable（郵件掃描）、Databricks Genie、Squarespace（網站與網域）、Redo（電商退貨）、Hospitable（短租管理）、Engine（訂飯店）、Uber Courier（寄送包裹）、Tesla（車輛與能源）、Eight Sleep（智慧床墊）、Strava（運動紀錄）、FitMetrics（健身教練）、HQ（公司知識庫）、LMTY（競品情報） |
 
 完整英文清單與原始描述見根目錄的 [README.md](../README.md)。
 

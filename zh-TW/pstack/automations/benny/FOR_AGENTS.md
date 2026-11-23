@@ -31,7 +31,7 @@
 - 我把工具和除錯用的機器人當作證據，而不是委派或修正的負責人。
 - 我允許子代理幫忙，但它們不能貼文到 Slack，也不能拿到 Slack 的憑證。
 - 我希望這整個套件被提交到目標 repository 的 `.cursor/automations/benny/`。它的 `SKILL.md` 檔案是直接的自動化指示，而不是註冊的 plugin 技能。
-- 我希望只透過目標 repository 已提交的 `.cursor/settings.json` 啟用 pstack，而且只為了共用的相依技能，例如 `how`、`why`、`tdd`、`unslop` 和需要的原則技能。
+- 我希望只透過目標 repository 已提交的 `.cursor/settings.json` 啟用 pstack，而且只為了共用的相依技能，例如 `why`、`tdd`、`unslop` 和需要的原則技能。
 - 我希望每個上線的自動化提示詞都直接讀它已提交的運作檔案。我不要 plugin 快取路徑、複製的摘錄或斜線技能的探索。
 - 我把使用者擁有的設定、功能地圖、導向地圖和機密放在 `.cursor/automations/benny/` 之外，讓套件更新時不會覆寫它們。
 - 當頻道座標、追蹤系統存取權、control 轉接器或功能地圖缺少或不確定時，我希望兩個自動化都「安全地失敗」（fail closed，停下而不是繼續）。
@@ -78,7 +78,7 @@
 
 保留每個無關的設定和 plugin。當既有檔案使用 jsonc 時，保留註解和有效的 jsonc 語法。
 
-我要由一個以目標 repository 為根目錄的全新 agent 來驗證。確認 pstack 的 `how`、`why`、`tdd`、`unslop` 以及 benny 使用的原則技能，在專案範圍內都能解析。不要把從目前工作階段或使用者範圍安裝載入的技能算進去。
+我要由一個以目標 repository 為根目錄的全新 agent 來驗證。確認 pstack 的 `why`、`tdd`、`unslop` 以及 benny 使用的原則技能，在專案範圍內都能解析。不要把從目前工作階段或使用者範圍安裝載入的技能算進去。
 
 如果專案範圍的 plugin 無法使用，或任何共用相依無法解析，停下並說明什麼失敗了。不要把 `.cursor/automations/benny/skills/` 加到 plugin manifest 中，也不要期待它的檔案出現在斜線技能清單中。
 

@@ -20,7 +20,7 @@ disable-model-invocation: true
 <skill dir>/scripts/statechart SPEC.tla [--config FILE] [--view FILE] [--out DIR]
 ```
 
-`scripts/statechart.ts` 是 TypeScript，所以用能執行 TypeScript 的執行環境來跑它。
+`scripts/statechart.ts` 是 TypeScript，所以用能執行 TypeScript 的執行環境來跑它。`scripts/statechart` 是一個 POSIX shell 腳本，會幫你挑一個。在原生 Windows 上，用 Node 22.18 到 22.x，或 Node 23.6 以上版本，執行 `node --disable-warning=ExperimentalWarning <skill dir>/scripts/statechart.ts`。
 
 第一次執行會用 mise 安裝 TLC 和 Java，需要網路。
 

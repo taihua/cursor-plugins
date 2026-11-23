@@ -49,7 +49,6 @@ Benny 需要外部設定和兩個上線的 Cursor 自動化。
 
 重新載入目標專案，或開一個以它為根目錄的全新 agent。確認這些共用的 pstack 技能能從專案範圍解析：
 
-- `how`
 - `why`
 - `tdd`
 - `unslop`

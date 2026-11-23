@@ -56,7 +56,7 @@
 
 ## 提交前先清理
 
-[開 PR 劇本](../../skills/poteto-mode/playbooks/opening-a-pr.md) 會在每次提交前對 diff 跑 `/deslop`，並對 PR 描述和 commit 內文套用 [`/unslop`](../../skills/unslop/SKILL.md)。`/deslop` 在 `cursor-team-kit` plugin 裡，不在 pstack。如果你沒有它，就用白話要求同樣的結果：移除只是在「旁白」的註解、沒有根據的防禦性檢查、死掉的相容性路徑，以及無關的修改。
+[開 PR 劇本](../../skills/poteto-mode/playbooks/opening-a-pr.md) 會在每次提交前對 diff 跑 `/deslop`，而 poteto-mode 會對 PR 描述和 commit 內文套用 [`/unslop`](../../skills/unslop/SKILL.md)。`/deslop` 在 `cursor-team-kit` plugin 裡，不在 pstack。如果你沒有它，就用白話要求同樣的結果：移除只是在「旁白」的註解、沒有根據的防禦性檢查、死掉的相容性路徑，以及無關的修改。
 
 清理文字時，`/unslop` 接受一個目標和你額外的規則：
 
