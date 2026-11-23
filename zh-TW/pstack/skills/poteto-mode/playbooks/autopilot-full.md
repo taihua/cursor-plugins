@@ -5,7 +5,7 @@
 一個判定涵蓋一份 patch，CI 全綠涵蓋一個 head。第 4 步只跑一次完整的 swarm，只有重大改動時才再跑一次。`playbooks/shipping.md` 中的 patch-id 規則可以讓某條檢查線的結果延續下去，而每個新的 head 都需要它自己的 CI 全綠。
 
 1. **操作者的關卡優先。** 授權只涵蓋佇列中的項目，所以操作者指明屬於自己的項目，以及佇列以外的 PR，都停在可合併狀態。要求說明計畫不等於同意執行。
-2. **每個 PR 派一個負責人，並把它的工作放在替代者找得到的地方。** 為整個計畫決定一次代碼平台。預設是 GitHub CLI（`gh`）。如果 `command -v origin` 成功、而且 Origin 能解析這個 repository，所有 PR 操作都用 `origin pr`。否則留在 `gh` 並記錄這個備案。永遠不要要求 Graphite（`gt`）。每個負責人都是一個 Cursor 雲端 agent，它負責建構、依 `playbooks/opening-a-pr.md` 開 PR、在真實成品上證明改動、依 `playbooks/babysit.md` 看顧到全綠，並在第 4 和第 5 步放行後合併。
+2. **每個 PR 派一個負責人，並把它的工作放在替代者找得到的地方。** 為整個計畫決定一次代碼平台。預設是 GitHub CLI（`gh`）。如果 `command -v origin` 成功、而且 Origin 能解析這個 repository，所有 PR 操作都用 `origin pr`。否則留在 `gh` 並記錄這個備案。永遠不要要求 Graphite（`gt`）。每個負責人都是一個 Cursor 雲端 agent，它負責建構、依 `playbooks/opening-a-pr.md` 開 PR、在真實成品上證明改動、依 `playbooks/babysit.md` 看顧到全綠，並在第 4 和第 5 步放行後合併。在那份劇本說要回報 rebase 的地方，負責人自己 rebase 自己的分支，並用 `git push --force-with-lease` 發布。
 
    及早開 PR，讓 CI 和機器人跟工作同步執行。只有在清除垃圾內容（`cursor-team-kit` plugin 的 `deslop` 技能（`/deslop`））和 `/no-comments` 之後，程式碼才算就緒，這樣完整的 swarm 才會在完成的程式碼上執行。然後 rebase 到目前的主線，並在自我證明之前回報程式就緒的 head，讓驗證在 patch 要落地的基底上執行。之後的每個 head 都要回報，自我證明、CI 和 babysit 完成後回報可合併。修正回合保持在那個基底上，除非主線發生衝突、弄壞 CI，或落地了一個已知會碰到相同檔案的並行改動，因為每次 rebase 都會讓 CI 重跑。在程式就緒的推送前，以及之後需要驗證者的推送前，在已提交的 head 上對改到的路徑跑 repo 的檢查。
 

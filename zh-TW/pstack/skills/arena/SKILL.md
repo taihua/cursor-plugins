@@ -16,7 +16,7 @@ disable-model-invocation: true
 
 1. 說明每個候選要產出的成品。
 2. 推導評分標準：3～6 條具體、可評分的準則，說明在**這個**任務上什麼算成功。它是 Phase D 中挑選者的工具。候選只看得到任務。
-3. 選擇執行者。使用 `~/.cursor/rules/pstack-models.mdc` 中的 `arena runners` 設定行。如果規則或該行不存在，預設在 `claude-opus-5-5-xhigh` 和 `grok-4.7-xhigh-fast` 上各跑一個。這一行中的 `auto` 或 `inherit-parent` 項目代表主模型，所以那一項省略 `model`。如果 Task 工具拒絕某個設定的項目，就用它所屬家族的預設值跑那個席位，並說明。家族依前綴區分：`claude-*`，以及 `grok-*`（含 `cursor-grok-*` 和 `composer-*`）。被拒絕的 `composer-*` 項目改用 `grok-4.7-xhigh-fast`。如果該家族沒有預設值，或 Task 工具拒絕了那個預設值，就從它的錯誤訊息中選同一家族最接近的有效 slug；沒有的話就拿掉這個席位並說明。如果拿掉席位後執行者少於兩個，就補到兩個為止（如果設定行只有一項，就是一個）。每個補上的執行者使用剩下的某個執行者的模型；如果一個都不剩，就省略 `model` 讓它使用主模型，並說明。當競技場涵蓋多個設計方向時，派出更多執行者。當工作的瓶頸在「產出量」而不是「判斷力」時，用同一個模型跑 N 次。依 **poteto-mode** 技能的「子代理」章節，為每個子代理選擇工作需要的推理等級與快速或標準速度。
+3. 從 `~/.cursor/rules/pstack-models.mdc` 中的 `arena runners` 設定行選擇執行者，預設是 `claude-fable-5-2-high`、`claude-opus-5-5-high-fast` 和 `gemini-4-neon-xhigh`。`auto` 或 `inherit-parent` 項目代表主模型，所以省略 `model` 並派出 `generalPurpose`。如果 Task 工具拒絕某個 slug，就用同一家族最接近的有效 slug，或拿掉這個席位，至少保留兩個執行者，並說明。家族依前綴區分，最長的符合者優先：`claude-fable-*`、`claude-*` 和 `gemini-*`，比對前先去掉開頭的 `cursor-`。其他 slug 的家族是它第一個連字號之前的文字。涵蓋多個設計方向時派出更多執行者；當工作的瓶頸在「產出量」而不是「判斷力」時，重複使用同一個模型。依 **poteto-mode** 技能的「子代理」章節，為每個子代理選擇推理等級。
 4. 依 **separate-before-serializing-shared-state** 原則技能，給每個候選自己的輸出位置（可以的話用 git worktree，否則用 `/tmp/arena-<slug>/candidate-<n>/`）。
 
 ## Phase B：分派（Fan out）
@@ -27,7 +27,7 @@ disable-model-invocation: true
 
 ## Phase C：交叉評審（Cross-judge）
 
-在所有 Phase B 的候選完成之後，從 `~/.cursor/rules/pstack-models.mdc` 中的 `arena cross-judge pool` 設定行選一個模型。如果規則或該行不存在，從 `claude-opus-5-5-xhigh` 和 `grok-4.7-xhigh-fast` 中選。派出一個唯讀的評審子代理。評審永遠不能和父代理同一個家族（家族依 Phase A 第 3 步的定義）。只依池中的順序嘗試其他家族的項目。`auto` 或 `inherit-parent` 項目代表主模型，所以它永遠不當評審。用預設池的話，Claude 父代理會得到 `grok-4.7-xhigh-fast`；其他任何家族的父代理會先得到 `claude-opus-5-5-xhigh`。如果 Task 工具拒絕某個項目，就從錯誤訊息中選同一個模型在最接近等級或速度的有效 slug；沒有的話就換下一個項目。如果沒有任何其他家族的項目能跑，就用同樣的方式嘗試預設池中其他家族的項目。如果那些也都跑不了，就跳過評審，在 Phase D 自己挑基底，並說明。如果你不知道父代理的模型，就依池中順序嘗試真實的 slug，並說明家族檢查沒有執行。評審會看到評分標準和以路徑標籤區分的候選，為每條準則打分數，並附理由推薦一個基底。它和你在 Phase D 的閱讀平行進行。候選還在寫的時候不要派出它。
+在所有 Phase B 的候選完成之後，從 `~/.cursor/rules/pstack-models.mdc` 中的 `arena cross-judge pool` 設定行派出一個唯讀的評審，預設是 `claude-opus-5-5-high-fast`、`gemini-4-neon-xhigh`。評審永遠不能和父代理同一個廠商，而且在這項檢查中 Fable 算是 Claude，所以使用第一個來自其他廠商的項目。`auto` 或 `inherit-parent` 項目代表主模型。如果你不知道父代理的模型，就用第一個真實的 slug，並說明廠商檢查沒有執行。如果 Task 工具拒絕某個 slug，就用同一家族最接近的有效 slug，再來是下一個這樣的項目，或者跳過評審，並說明。在你於 Phase D 閱讀的同時，評審依路徑標籤，就每條評分準則為每個候選打分數，並推薦一個基底。
 
 ## Phase D：挑選基底（Pick）
 

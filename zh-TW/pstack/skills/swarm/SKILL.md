@@ -21,7 +21,7 @@ disable-model-invocation: true
 
 1. 說明完成判定式，以及 swarm 必須回傳的成品或報告。
 2. 選擇形狀。分成區塊、讓 N 個 worker 用相同的任務說明競賽，或兩者混合。競賽或混合形狀的話，在派遣前宣告 `first pass`（第一個通過的）、`rank all`（全部排名）或 `best-of`（取最佳）。
-3. 從 `~/.cursor/rules/pstack-models.mdc` 中的 `swarm workers` 設定行選擇 worker 模型。如果規則或該行不存在，用 `grok-4.7-xhigh-fast`。如果是 `auto` 或 `inherit-parent`，省略 `model`，讓 worker 使用主模型。如果 Task 工具拒絕某個 slug，就用預設值並說明。如果它連預設值都拒絕，就從它的錯誤訊息中選同一家族最接近的有效 slug。模型競賽的話，事先寫明每一組的模型。依 **poteto-mode** 技能的「子代理」章節，為每個子代理選擇工作需要的推理等級與快速或標準速度。
+3. 從 `~/.cursor/rules/pstack-models.mdc` 中的 `swarm workers` 設定行選擇 worker 模型。如果規則或該行不存在，用 `claude-opus-5-5-high-fast`。如果是 `auto` 或 `inherit-parent`，省略 `model`，讓 worker 使用主模型。如果 Task 工具拒絕某個 slug，就用預設值並說明。如果它連預設值都拒絕，就從它的錯誤訊息中選同一家族最接近的有效 slug。模型競賽的話，事先寫明每一組的模型。依 **poteto-mode** 技能的「子代理」章節，為每個子代理選擇工作需要的推理等級。
 4. 當 worker 會寫入時，給每個 worker 自己可寫的輸出位置。當 worker 要驗證或量測 commit 時，每份任務說明都要寫明確切的 SHA。量測類的任務說明還要寫明方法（樣本數、一個樣本是什麼、順序）。worker 在結果中記錄這兩者。
 
 ## Phase B：分派（Fan out）

@@ -16,27 +16,19 @@ color: yellow
 
 下方的「原則」章節是每個觸發條件的依據。在你的回覆中，點名每一條影響了決定的原則，以及它具體改變了哪個選擇。只引用你在本次工作階段中**實際讀過其子技能 SKILL.md** 的原則。
 
-其餘觸發條件：
+其餘觸發條件只寫在這裡：
 
-- 你在一個任務上的第一則訊息 → 用你自己的話告訴使用者：他們的目標、他們要解決的問題，以及（如果這個任務會交付改動）你預期能達成目標的最小改動。不要等待確認。如果證據排除了使用者要求的改動，就把證據拿出來並停下。在每份子代理的任務說明中重述使用者的目標，每個 PR 的 `## Why` 也以它開頭。每份最終報告（包括你的最終回覆）也以它開頭，除非那是一個完全指定好的單行修改。
-- 不簡單的改動、架構決策，或「我們確定嗎？」→ **how** 技能。
-- 正要用 `AskQuestion` 問「用哪種做法」、「我該怎麼做」或「這該做什麼」這類分岔問題時 → 先分類再問。如果答案是一個你**實際執行就能觀察到**的事實（行為、時間、版面、輸出、效能，甚至某個 eval 能否區分出差異），那就不是該由人類回答的問題。透過原型劇本（`playbooks/prototype.md`）做個草稿，讓結果來決定。如果任務是一個唯讀的「調查」、交付物是附出處的答案，就留在調查裡，依證據回答，而不是去做草稿。只有在沒有任何實驗能解決的真正產品或偏好判斷時，才保留提問。在「完全自主授權」之下，授權涵蓋的決定就自己做、去執行、再回報，不需要回覆關鍵字也不需要提議。在授權之下，對於只有操作者能做的決定，套用一個預設值，附上完整說明回報，並用白話說明操作者可以改叫你怎麼做。操作者用他們自己的話回答。永遠不要給一個讓人照打回來的簡寫代碼。操作者指定的關卡，以及「自主」章節中的「一律暫停」清單，仍然需要操作者。
-- 任何程式碼 → 先命名資料結構（data shape），並依 **principle-model-the-domain** 選擇它的組織結構。
-- 跨越函式邊界的程式碼 → **architect** 技能，在實作前做平行的設計探索。
-- 平行分派 → 涵蓋矩陣、競賽、關卡賽與探索分區用 **swarm** 技能。需要挑選基底並嫁接的設計或程式碼比賽用 **arena**。
-- 有爭議的設計 → 出貨前用 **interrogate** 技能（多模型對抗式審查）。
-- 不簡單的多步驟工作 → 寫下吞吐量檢查點（Feature 劇本第 3 步）。
-- 任何文字產出，包括你給使用者的回覆 → **unslop** 技能。依 **撰寫回覆** 章節撰寫回覆。給 agent 看的文字也要遵循 **create-skill** 技能（Cursor 內建、用來撰寫 SKILL.md 的技能）。
-- 文件、RFC、README、PR 描述或 commit 訊息 → **technical-writing** 技能（`/technical-writing`）。
-- 提交（commit）之前 → `cursor-team-kit` plugin 的 `deslop` 技能（`/deslop`）。
-- 審查之前 → **no-comments** 技能（`/no-comments`）。
-- 交付 UI / IDE / CLI → 對應的 control 技能。`cursor-team-kit` 提供 `control-cli`（CLI 與 TUI）和 `control-ui`（瀏覽器 / Electron / 網頁 UI）。修 bug 時，先自己在同一個介面上重現。只有在 Bug fix 第 1 步那個狹窄的例外下，才交給使用者。
-- 跑效能測試、自己量測效能，或回報你量到的加速或退步 → 在回報或根據數字採取行動之前，先跑 **benchmark-checklist** 技能。
-- 任何 PR 狀態相關的請求（「babysit this」、「get it green」、「處理 bugbot 留言」，最常見的是「check on PR X」或「X 還有什麼沒處理的」）→ **Babysit** 劇本（`playbooks/babysit.md`），而**不是** Cursor 內建的 babysit 技能（它的描述也符合同樣的字眼）。單純開一個 PR 永遠不會觸發它。開始輪詢前先宣告模式。從請求對應到模式的規則由劇本第 1 步負責。在階段 agent 內部使用 `drive` 會讓那個 agent 無法結束它的回合。
-- 被要求合併或出貨一串全綠的 PR → **Shipping** 劇本（`playbooks/shipping.md`）。全綠不等於安全。在取得每個 PR 獨立的判定之前，什麼都不會被啟動，而且只有從根部開始、連續通過驗證的那一段會被合併。
-- Bugbot 或 agentic security review 留言了 → 抱持懷疑。它們會抓到真正的 bug，也會提出不是問題的問題和小毛病，所以依各自的價值評估每一則，並用具體理由駁回雜訊，而不是一直改程式碼。依 `references/bugbot-triage.md` 分類為修正 / 駁回 / 詢問。
-- 任務進行中發現技能壞掉 → 用它自己的 PR 修。不要卡住。不要默默繞過它。
-- 長時間、自主或多階段的工作，或任何使用者離開、之後才回來審查的任務（「going to bed」、「trust it when i'm back」、「/loop until X」）→ 透過 **show-me-your-work** 技能留下決策紀錄。當利害關係需要可稽核的紀錄時就提交它，否則留在本機。
+- 第一則訊息 → 重述使用者的目標，以及能達成目標的最小改動，然後繼續做。每份子代理的任務說明、PR 的 `## Why` 和最終報告都以這個目標開頭。
+- 啟動任何 agent，不論是 Task 子代理還是 Project worker（專案工作者）→ 它的啟動訊息（kickoff）第一行是 `Read <path>/worker.md before anything else.`，其中 `<path>` 是本技能資料夾的絕對路徑。操作者的規則存在只會透過斜線指令載入的技能裡，所以沒有其他方式能傳到另一個 agent。啟動訊息其餘部分只寫目標和任務；如果是 `poteto-agent`，再加上本檔案的絕對路徑。
+- 一個你**實際執行就能解決**的分岔 → 依 `playbooks/prototype.md` 做原型，而不是去問。
+- 程式碼 → 先命名資料結構（data shape）。跨越函式邊界 → **architect**。平行分派 → **swarm**。比賽 → **arena**。有爭議的設計 → **interrogate**。
+- 文字產出，包括你的回覆 → **unslop**。文件、PR 描述、commit 訊息 → **technical-writing**。
+- 提交（commit）之前 → `cursor-team-kit` plugin 的 `/deslop`。審查之前 → **no-comments**。
+- 交付 UI / IDE / CLI → `cursor-team-kit` 的 `control-ui` 或 `control-cli`。
+- 你量測到的數字 → **benchmark-checklist**。
+- PR 狀態 → **Babysit** 劇本，而**不是** Cursor 內建的 babysit 技能。合併一串全綠的 PR → **Shipping** 劇本。
+- 機器人的審查留言 → 依各自的價值判斷每一則。
+- 長時間或無人看管的工作 → **show-me-your-work**。
 
 ## 原則（Principles）
 
@@ -93,60 +85,28 @@ color: yellow
 
 ## 子代理（Subagents）
 
-**在劇本步驟中派出的任何子代理都使用 `subagent_type: "poteto-agent"`**（寫程式的代理、臨時幫手）。接收 `/poteto-mode` 的聊天視窗負責執行劇本。永遠不要派一個 `poteto-agent` 去執行劇本本身。被路由到的工作流程技能（`how`、`why`、`interrogate`、`reflect`、`swarm`）會為多模型審查自行設定 `subagent_type`。尊重該技能的規定，不要覆寫成 `poteto-agent`。
+**在劇本步驟中直接派出的任何子代理都使用 `subagent_type: "poteto-agent"`。** 接收 `/poteto-mode` 的聊天視窗自己執行劇本。被路由到的工作流程技能（`interrogate`、`swarm`）會自行設定 `subagent_type`。尊重它。
 
-**每次 `Task` 呼叫的預設值。** `run_in_background: true`（對執行中 agent 的引導或接續也一樣，因為前景呼叫會佔住你的回合，讓其他報告等著）、agent 模式（readonly 會拿掉 MCP）、給檔案指標而不是把內容貼進去、每個角色明確指定模型（可透過 `/setup-pstack` 設定；預設寫程式用 `grok-4.7-xhigh-fast`，文字與判斷用 `claude-opus-5-5-xhigh`）。寫程式的代理依難度分級。最難的改動（跨領域的設計、棘手的並行、微妙的演算法）交給你最強的判斷模型（`claude-opus-5-5-xhigh`），不論這個任務是需要對模糊意圖做判斷，還是一連串精確指定、要照字面執行的步驟。瑣碎的機械式修改交給你的快速寫程式模型。`/setup-pstack` 規則中的各角色設定行，會覆寫這些預設值以及被路由技能（`how`、`why`、`arena`、`swarm`、`architect`、`interrogate`、`reflect`）中的模型選擇。沒有設定行的角色保持預設；設定為 `inherit-parent` 或 `auto` 的角色則使用主聊天的模型（省略 Task 的 `model`）。每個寫程式劇本的設定模型來自它的那一行（`feature, refactoring`、`bug-fix`、`perf-issue` 或 `hillclimb`），最難的改動讀 `hardest tasks`。文字與判斷讀 `judgment and prose`。
+**每次 `Task` 呼叫的預設值。** `run_in_background: true`、agent 模式（readonly 會拿掉 MCP）、給檔案指標而不是把內容貼進去，以及每個角色明確指定模型，Project worker 也一樣。`/setup-pstack` 會寫入 `~/.cursor/rules/pstack-models.mdc`，其中的各角色設定行會覆寫下方的預設值，以及被路由技能（`arena`、`swarm`、`interrogate`）中的角色模型。沒有設定行的角色保持預設。設定為 `inherit-parent` 或 `auto` 的行會讓該角色使用主模型，所以要省略 `model` 並派出 `generalPurpose`，因為 `poteto-agent` 預設使用 Opus 5.5。每個寫程式劇本讀它自己的那一行（`feature, refactoring`、`bug-fix`、`perf-issue` 或 `hillclimb`），文字與判斷讀 `judgment and prose`，瑣碎的機械式修改讀 `swarm workers`。如果規則中沒有 `# defaults: 3` 這一行，代表它是由較舊的設定寫入的。繼續遵守它的各行，並在每個工作階段告訴使用者一次，請他重跑 `/setup-pstack`。
 
-**讓模型配合工作。** 每次派遣前，從角色的設定行或預設值開始，選擇工作需要的推理等級與速度。`/setup-pstack` 的預算決定每個角色的起始等級，預設是 xhigh。最難或最微妙的工作往上調一級，最高到 max。判斷類工作往下調一級，例行工作往下調兩級以上。只有在工作緊急時才用快速模式，也就是 CI 或主線是紅的、或有人此刻正卡在等結果。其他情況用標準速度，也就是去掉 `-fast` 的同一個 slug。驗證是例外，維持使用 `swarm workers` 的模型與速度（預設 `grok-4.7-xhigh-fast`）。只改推理等級和是否用 fast slug，保持角色指定的模型家族，這樣多元的小組才能保持多元。如果該家族沒有對應等級與速度的 slug，用最接近的 slug。設為 `auto` 或 `inherit-parent` 的角色維持使用主模型。如果 Task 工具拒絕了調整後的 slug，不要再試另一個調整後的 slug。改用角色的設定行或預設值，並說明這件事。如果 Task 工具連那個也拒絕，就繼續使用呼叫方技能的備案。當 Task 錯誤訊息說該模型無效，或有效 slug 清單中沒有它時，就算該 slug 被拒絕。永遠不要傳入被拒絕的 slug，並跳過任何 slug 已被拒絕的備案。當呼叫方技能沒有備案時，從錯誤訊息的有效 slug 清單中選最接近該角色家族的 slug；如果清單中沒有，就省略 `model`，讓子代理使用主模型。當呼叫方技能的備案 slug 用完、又沒說下一步怎麼辦時，也省略 `model`。兩種情況都要說明。
+- 程式碼、文字與判斷：`claude-opus-5-5-xhigh-fast`。
+- 瑣碎的機械式修改：`claude-opus-5-5-high-fast`。
+- 多元的審查與設計小組：`claude-fable-5-2-high`、`claude-opus-5-5-high-fast` 和 `gemini-4-neon-xhigh` 各跑一個。
 
-你要為每個子代理的工作負責。審查 diff 並寫你自己的摘要，不要直接轉述它說的話。第二意見就是同一個提示詞給不同的模型。意見一致是高價值的訊號。
+**Fable 5.2 是例外。** 只有在使用者為這個任務指名它，或同一份任務說明用 Opus 5.5 xhigh 跑了兩次都沒通過檢查時，它才會在小組之外執行。說明是哪一種情況。光是困難永遠不夠格。
 
-**預設使用全新的子代理。** 新工作交給一個全新的子代理，並給它整合過的範圍：原始任務說明、之後的每一條指示，以及前一個 agent 的報告和分支。修正回合、後續工作、重試和佇列中的下一項都適用。只有當新工作嚴格需要存在於某個既有子代理中、而且搬移成本很高的狀態時——它的本機 checkout、它未提交的修改，或它仍在執行的程序（例如開發伺服器、模擬器或 babysit 監看器）——才接續、傳訊息或排隊給那個子代理。對執行中 agent 下停止或暫停命令不算重複使用。像 PR 負責人這樣的角色比它的 agent 活得更久。一旦那個 agent 回報完畢，就由一個全新的 agent 接下這個角色的下一輪。透過中斷串接的接續會默默丟掉指示，所以要派一個帶有整合範圍的全新子代理，而不是相信一份「完成了」的摘要。
+**讓模型配合工作。** 從角色的設定行或預設值開始，保持它的模型家族，並設定工作需要的推理等級。`/setup-pstack` 的預算決定每個角色的起始等級。小組席位維持列出的等級。其他角色在最難或最微妙的工作上往上調一級，最高到 xhigh；判斷類工作往下調一級，例行工作往下調兩級以上。沒有任何角色會超過 xhigh。Opus 5.5 一律使用它的 `-fast` slug。驗證一律使用 `swarm workers` 的模型，預設是 `claude-opus-5-5-high-fast`。Gemini 席位使用 `gemini-4-neon-xhigh`，除非它的設定行指定了其他等級。如果 Task 工具拒絕了某個 slug，永遠不要再傳入它。依序退回到角色的設定行或預設值、呼叫方技能的備案、同家族中最接近的有效 slug，最後省略 `model`。並說明這件事。
+
+你要為每個子代理的工作負責。審查 diff 並寫你自己的摘要。第二意見就是同一個提示詞給另一家廠商的模型。
+
+**預設使用全新的子代理。** 修正回合、後續工作、重試或佇列中的下一項，都交給一個全新的子代理，並給它原始任務說明、之後的每一條指示，以及前一個 agent 的報告和分支。只有當工作需要存在於某個既有子代理中、而且搬移成本很高的狀態時，才接續那個子代理：它的 checkout、它未提交的修改，或它仍在執行的程序。
 
 ## 撰寫回覆（Writing the reply）
 
-起草時就寫乾淨。起草後再做清理，並不能移除這些模式。
-
-- **簡短的直述句。** 一句一個想法，以句號結束。
-- **任何地方都不用長破折號。** 檔案清單的項目寫成一個句子（「`main.js` 負責持久化與 IPC 處理器」），粗體的章節標題也寫成獨立的句子（「**驗證。** 透過 CDP 端到端驗證」）。
-- **句中用冒號當連接詞也不行**（unslop 第 14 條規則）。冒號放在清單前面沒問題。
-- **簡潔不是省略內容的藉口。** 句子要短，但劇本回覆中指定的每個章節都要保留：細節、取捨、選擇、待決事項。
-- **從使用者和維護者的角度說明影響。** 在任何實作細節之前，先說出這項工作是為誰做的（終端使用者、匯入這個函式庫的同事），以及對他們有什麼改變。接著說下一個負責這段程式碼的工程師會繼承什麼。如果你說不出任何一方會注意到什麼，那麼不是工作有問題，就是解釋有問題。
-- **永遠不要捏造連結、引用或對話紀錄參照。** 只連結你在本次工作階段中產出或讀過的成品。
-- **每個主張都要在同一句話中帶著它的證據或標籤。** 已量測、推論，或猜測。預測或沒看到的原因都是猜測。永遠不要把一個你自己能跑的檢查丟給人類去做。
-
-每個劇本都以這樣寫成的回覆結束，PR 連結格式為 `https://github.com/<owner>/<repo>/pull/<number>`。每個劇本自己的回覆說明只列出該劇本獨有的內容。
-
-## 註解（Comments）
-
-註解遵循和回覆相同的規則。邊寫邊保持乾淨。只有在程式碼無法表達的、不明顯的「為什麼」時才保留註解。驗證或測試腳本不加旁白式的階段註解，例如 `// Phase 1: add cards`。由斷言或 log 字串來說明那一步，例如 `assert(ok, 'persisted across restart')`。這適用於你產出的每個檔案，包括代理的 diff。
+寫簡短的直述句，不用長破折號，也不用冒號當連接詞。先說對使用者有什麼改變。每個主張都附上它的證據或標籤（已量測、推論，或猜測）。永遠不要把一個你自己能跑的檢查丟給人類去做。
 
 ## 劇本（Playbooks）
 
-開一份待辦清單，前幾項是對應劇本的步驟（逐字複製），然後才是任務特定的待辦事項。你選擇不做的步驟留在清單中，加上一行 `skip: <原因>`。把任務對應到下列某個劇本，並打開它在 `playbooks/<title>.md` 的完整步驟，title 轉成 kebab case（保留連字號、去掉其他標點），除非該項另外給了檔名。逐字複製它的步驟。
+把任務對應到某個劇本，並打開它在 `playbooks/<title>.md` 的步驟，title 轉成 kebab case。先把它的步驟複製到待辦清單工具裡。大型、跨領域或無人看管的工作，或沒有任何劇本適用的任務，導向 **figure-it-out** 技能。
 
-大型或跨領域的工作（橫跨許多呼叫點的遷移、雄心勃勃的多部分改動），或使用者離開、之後要信任結果的工作，即使有像 Feature 這樣較窄的劇本適用，也要導向 **figure-it-out** 技能。當沒有任何隨附劇本適用時，也用 **figure-it-out**，它會為該任務設計一份量身訂做的嚴謹劇本。常駐的專案規模計畫（跨多天、很多堆疊 PR、一個協調者底下的一群子代理）則改導向 **Orchestrate**。figure-it-out 設計單次量身訂做的執行，orchestrate 執行整個計畫。
-
-- **Investigation（調查）。** 唯讀問題：X 怎麼運作、Y 為什麼這樣建、我們對 Z 確定嗎、我們該做 X 還是 Y。
-- **Bug fix（修 bug）。** 一個要重現、找出根本原因、並用執行期證據修正的回報缺陷。
-- **Perf issue（效能問題）。** 一個要追蹤、並對照基準值改善的量測到的緩慢。
-- **Hillclimb（爬坡優化）。** 對照目標持續、科學地改善一個指標：以前後量測反覆迴圈各種假設，留下決策紀錄，每個被接受的改進一個 commit。和「效能問題」不同，後者是一次性修正。
-- **Runtime forensics（執行期鑑識）。** 從即時埋點量測診斷執行期症狀（記憶體洩漏、閒置 CPU 空轉、畫面異常）。交付物是診斷，不是修正。
-- **Trace forensics（追蹤檔鑑識）。** 診斷事後交給你的已擷取效能分析檔（cpuprofile、trace、spindump、heap snapshot）。交付物是診斷，不是修正。
-- **Feature（新功能）。** 新增或改變的行為，從一個命名好的資料結構開始建構。
-- **Refactoring（重構）。** 保留行為、只改結構或形狀的變更（重新命名、抽出、內聯、去重、搬移）。
-- **Prototype（原型）。** 用完即丟的草稿，便宜地做出設計或行為上的決定，或透過觀察而不是問人來解決實驗性的分岔（「prototype」、「mock it up」、「試試這個版面」、「畫個草稿來決定」）。
-- **Visual parity（視覺一致）。** 像素級的 UI 等價：讓兩個實作一致，或遷移樣式系統。
-- **Authoring or modifying a skill（撰寫或修改技能）。** 撰寫或編輯 SKILL.md。檔案：`playbooks/authoring-a-skill.md`。
-- **Eval（評測）。** 在推廣之前，測試技能、結構或提示詞的改動如何影響 agent 行為。
-- **Babysit（看顧）。** 把一個 PR 或一串 PR 推到可合併：衝突、審查討論串、CI。
-- **Shipping（出貨）。** Babysit 之後的另一半。獨立驗證一串全綠的 PR，然後由下而上合併連續通過驗證的那一段，預設透過 `gh`，有 Origin CLI 時用 Origin。
-- **Autonomous run（自主執行）。** 一個要不停推進直到完成的長任務（「run until done」、「/loop until X」）。
-- **Orchestrate（統籌）。** 交給一個協調者聊天視窗的常駐專案：跨多天、很多堆疊 PR、數十到數百個子代理、極少的人類回合（「執行這整個專案」、「負責這次遷移直到它落地」）。和「自主執行」不同，後者是把一個任務推到一個判定條件。一個 agent 在本工作階段預算內就能完成的工作導向那裡，而不是這裡，不管措辭聽起來多像一個計畫。
-- **Autopilot-full（全自動駕駛）。** 一個獨立 PR 的佇列，以完全自主的方式一路做到合併。每個 PR 一個負責人，從建構帶到合併；根代理在負責人合併前，用 swarm 驗證每個 PR（「autopilot this queue」、「full autopilot」、一 PR 一負責人的計畫）。
-- **Autopilot-stack（自動駕駛不合併版）。** 沒有合併的 Autopilot-full。以完全自主的方式建構並驗證一個 PR 佇列，然後交給操作者合併。只有當一個 PR 建立在另一個 PR 之上時才疊在它上面（「autopilot-stack」、「autopilot, don't merge」、「stack them, don't ship」、「build the stack, I'll land it」）。
-- **Session pickup（接手工作）。** 從對話紀錄、雲端 agent 網址或已推送的分支，接續或接手先前 agent 進行中的工作。
-- **Pause safely（安全暫停）。** 在明確要求暫停、要離線、Cursor 要重開或上下文即將被壓縮時，乾淨地暫停進行中的工作，以便之後接續。是「接手工作」的互補。
-- **Multi-phase or multi-PR plan（多階段或多 PR 計畫）。** 跨多個階段或堆疊 PR 的工作。檔案：`playbooks/multi-phase-plan.md`。
-- **Worktree and simulator cleanup（worktree 與模擬器清理）。** 透過刪除已合併或廢棄的 git worktree 與過期的 iOS 模擬器來回收本機磁碟（「什麼在佔我的磁碟」、「清理 worktree」、「刪掉可以安全刪的 worktree」、「釋放空間」、「刪除舊的模擬器」）。檔案：`playbooks/worktree-cleanup.md`。
-- **Opening a PR（開 PR）。** 在每個其他劇本的結尾被呼叫。
+Investigation（調查）、Bug fix（修 bug）、Perf issue（效能問題）、Hillclimb（爬坡優化）、Runtime forensics（執行期鑑識）、Trace forensics（追蹤檔鑑識）、Feature（新功能）、Refactoring（重構）、Prototype（原型）、Visual parity（視覺一致）、Authoring a skill（撰寫技能）、Eval（評測）、Babysit（看顧）、Shipping（出貨）、Autonomous run（自主執行）、Autopilot-full（全自動駕駛）、Autopilot-stack（自動駕駛不合併版）、Session pickup（接手工作）、Pause safely（安全暫停）、Multi-phase plan（多階段計畫）、Worktree cleanup（worktree 清理）、Opening a PR（開 PR）。
